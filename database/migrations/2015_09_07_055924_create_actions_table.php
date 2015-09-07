@@ -12,7 +12,19 @@ class CreateActionsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('actions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('position')->unsigned();
+            $table->string('method');
+            $table->text('url')->nullable();
+            $table->text('parse_expression');
+            $table->string('parse_type');
+
+            $table->integer('rule_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('rule_id')->references('id')->on('rules');
+        });
     }
 
     /**
@@ -22,6 +34,6 @@ class CreateActionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('actions');
     }
 }

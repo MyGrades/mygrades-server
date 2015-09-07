@@ -12,7 +12,16 @@ class CreateActionParamsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('action_params', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('key');
+            $table->string('value')->nullable();
+
+            $table->integer('action_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('action_id')->references('id')->on('actions');
+        });
     }
 
     /**
@@ -22,6 +31,6 @@ class CreateActionParamsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('action_params');
     }
 }

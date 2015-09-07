@@ -1,7 +1,9 @@
 <?php
 
+use App\University;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,8 +16,24 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        $this->call(HsrmSeeder::class);
 
         Model::reguard();
+    }
+}
+
+
+class HsrmSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $hsrm = University::create([
+            "name" => "Hochschule RheinMain"
+        ]);
     }
 }
