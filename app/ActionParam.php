@@ -12,4 +12,12 @@ class ActionParam extends Model
      * @var string
      */
     protected $table = 'action_params';
+
+    /**
+     * Get the action that owns the action param.
+     */
+    public function action()
+    {
+        return $this->belongsTo('App\Action');
+    }
 }

@@ -12,4 +12,21 @@ class Rule extends Model
      * @var string
      */
     protected $table = 'rules';
+
+
+    /**
+     * Get the university that owns the rule.
+     */
+    public function university()
+    {
+        return $this->belongsTo('App\University');
+    }
+
+    /**
+     * Get the actions for the rule.
+     */
+    public function actions()
+    {
+        return $this->hasMany('App\Action');
+    }
 }

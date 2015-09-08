@@ -12,4 +12,13 @@ class University extends Model
      * @var string
      */
     protected $table = 'universities';
+
+
+    /**
+     * Get the rules for the university.
+     */
+    public function rules()
+    {
+        return $this->hasMany('App\Rule');
+    }
 }

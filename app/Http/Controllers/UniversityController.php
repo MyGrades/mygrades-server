@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class UniversityController extends Controller
 {
@@ -23,11 +24,14 @@ class UniversityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param University $university
      * @return Response
      */
-    public function show($id)
+    public function show(University $university)
     {
-        //
+        if (Input::has('detailed') && Input::get('detailed') === "true") {
+            $university->load('rules.actions.actionParams');
+        }
+        return $university;
     }
 }

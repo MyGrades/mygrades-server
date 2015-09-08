@@ -22,6 +22,6 @@ Route::get('/test', function () {
 
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
-    Route::get('universities/{id}', ['uses' => 'UniversityController@show']);
+    Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
 
 });
