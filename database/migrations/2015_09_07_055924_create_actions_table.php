@@ -13,7 +13,7 @@ class CreateActionsTable extends Migration
     public function up()
     {
         Schema::create('actions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('action_id');
             $table->integer('position')->unsigned();
             $table->string('method');
             $table->text('url')->nullable();
@@ -23,7 +23,7 @@ class CreateActionsTable extends Migration
             $table->integer('rule_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('rule_id')->references('id')->on('rules');
+            $table->foreign('rule_id')->references('rule_id')->on('rules');
         });
     }
 

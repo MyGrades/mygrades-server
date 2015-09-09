@@ -13,14 +13,14 @@ class CreateActionParamsTable extends Migration
     public function up()
     {
         Schema::create('action_params', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('action_param_id');
             $table->string('key');
             $table->string('value')->nullable();
 
             $table->integer('action_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('action_id')->references('id')->on('actions');
+            $table->foreign('action_id')->references('action_id')->on('actions');
         });
     }
 
