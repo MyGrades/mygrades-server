@@ -13,12 +13,12 @@ class CreateRulesTable extends Migration
     public function up()
     {
         Schema::create('rules', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('rule_id');
             $table->string('type'); // TODO: table for type?
             $table->integer('university_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('university_id')->references('id')->on('universities');
+            $table->foreign('university_id')->references('university_id')->on('universities');
         });
     }
 
