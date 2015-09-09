@@ -14,6 +14,13 @@ class Action extends Model
     protected $table = 'actions';
 
     /**
+     * Column of the key used by the Model.
+     *
+     * @var string
+     */
+    protected $primaryKey = "action_id";
+
+    /**
      * Get the rule that owns the action.
      */
     public function rule()

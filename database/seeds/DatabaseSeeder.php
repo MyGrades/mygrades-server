@@ -66,7 +66,7 @@ class RuleSeeder extends Seeder {
      */
     public function run()
     {
-        /*
+        /* TODO: add rule for HSRM
         $login = Action::create([
             'position' => 1,
             'method' => 'POST',

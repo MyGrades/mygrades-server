@@ -13,6 +13,12 @@ class University extends Model
      */
     protected $table = 'universities';
 
+    /**
+     * Column of the key used by the Model.
+     *
+     * @var string
+     */
+    protected $primaryKey = "university_id";
 
     /**
      * Get the rules for the university.
@@ -21,4 +27,10 @@ class University extends Model
     {
         return $this->hasMany('App\Rule');
     }
+
+
+    // TODO: create Query Scope for active universities
+    // http://laravel.com/docs/5.1/eloquent#query-scopes
+
+    // TODO: mutator for date? ISO8601 ?
 }

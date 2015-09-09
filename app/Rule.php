@@ -13,6 +13,13 @@ class Rule extends Model
      */
     protected $table = 'rules';
 
+    /**
+     * Column of the key used by the Model.
+     *
+     * @var string
+     */
+    protected $primaryKey = "rule_id";
+
 
     /**
      * Get the university that owns the rule.

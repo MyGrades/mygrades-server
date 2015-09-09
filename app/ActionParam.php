@@ -14,6 +14,13 @@ class ActionParam extends Model
     protected $table = 'action_params';
 
     /**
+     * Column of the key used by the Model.
+     *
+     * @var string
+     */
+    protected $primaryKey = "action_param_id";
+
+    /**
      * Get the action that owns the action param.
      */
     public function action()
