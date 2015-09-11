@@ -66,20 +66,28 @@ class RuleSeeder extends Seeder {
      */
     public function run()
     {
-        /* TODO: add rule for HSRM
-        $login = Action::create([
+        // create Rule bachelor
+        $bachelor = new Rule([
+                'type' => 'bachelor'
+        ]);
+
+        $hsrm = University::find(333);
+
+        // create Rule for HSRM
+        $hsrm->rules()->saveMany([
+            $bachelor,
+            new Rule(['type' => 'master']),
+            new Rule(['type' => 'registeredTests'])
+        ]);
+
+
+        $login = new Action([
             'position' => 1,
             'method' => 'POST',
             'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href',
             'parse_type' => 'XPATH'
         ]);
-        $login->actionParams()->saveMany([
-            new ActionParam(['key' => 'asdf']),
-            new ActionParam(['key' => 'fdsa'])
-        ]);
 
-        // create Rule bachelor
-        $bachelor = Rule::create(['type' => 'bachelor']);
         // add actions
         $bachelor->actions()->saveMany([
             new Action([
@@ -89,15 +97,43 @@ class RuleSeeder extends Seeder {
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action',
                 'parse_type' => 'XPATH'
             ]),
-            $login
+            $login,
+            new Action([
+                'position' => 2,
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href',
+                'parse_type' => 'XPATH'
+            ]),
+            new Action([
+                'position' => 3,
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/a[1]/@href',
+                'parse_type' => 'XPATH'
+            ]),
+            new Action([
+                'position' => 4,
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/ul/li/a[1]/@href',
+                'parse_type' => 'XPATH'
+            ]),
+            new Action([
+                'position' => 5,
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]/tbody/tr[contains(., "1120")]/td[5]',
+                'parse_type' => 'XPATH'
+            ]),
 
         ]);
-        */
-        $hsrm = University::find(333);
-        $hsrm->rules()->saveMany([
-            new Rule(['type' => 'bachelor']),
-            new Rule(['type' => 'master']),
-            new Rule(['type' => 'registeredTests'])
+
+        $login->actionParams()->saveMany([
+            new ActionParam(['key' => 'asdf']),
+            new ActionParam(['key' => 'fdsa'])
         ]);
+
+
+
+
+
+
     }
 }

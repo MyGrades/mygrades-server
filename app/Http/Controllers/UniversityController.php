@@ -9,6 +9,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class UniversityController
+ * @package App\Http\Controllers
+ *
+ * Handles everything regarding Resource University.
+ */
 class UniversityController extends Controller
 {
     /**

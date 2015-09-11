@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,7 +27,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
-        $router->model('university', 'App\University');
+        // global route patterns
+        $router->pattern('university', '[0-9]+');
+
+        // route-model bindings
+        $router->model('university', 'App\University', function()
+        {
+            throw new ModelNotFoundException;
+        });
 
     }
 

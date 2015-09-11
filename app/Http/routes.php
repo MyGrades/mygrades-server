@@ -15,13 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/test', function () {
-    return "test";
-});
-
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
 
+    // TODO: implement Controller
+    //Route::post('universities/{university}/wish', ['uses' => '']);
+    //Route::post('universities/{university}/errors', ['uses' => '']);
 });
