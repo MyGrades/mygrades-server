@@ -20,7 +20,6 @@ test:
             - "PHPUnit-ubuntu-fix.xml"
         directory:
             - "tests/"
-        run_from: "phpunit"
         coverage: "tests/logs/coverage"
     php_mess_detector:
         allow_failures: true
