@@ -3,6 +3,7 @@ build_settings:
     ignore:
         - "vendor"
         - "tests"
+        - "_ide_helper.php"
     mysql:
         host: "localhost"
         user: "dev_user"
@@ -19,7 +20,7 @@ test:
             - "PHPUnit-ubuntu-fix.xml"
         directory:
             - "tests/"
-        run_from: "phpunit/"
+        run_from: "phpunit"
         coverage: "tests/logs/coverage"
     php_mess_detector:
         allow_failures: true
@@ -27,5 +28,3 @@ test:
         standard: "PSR2"
     php_cpd:
         allow_failures: true
-    grunt:
-        task: "build"
