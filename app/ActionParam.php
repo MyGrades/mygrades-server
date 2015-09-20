@@ -3,7 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * App\ActionParam
+ *
+ * @property integer $action_param_id
+ * @property string $key
+ * @property string $value
+ * @property string $type
+ * @property integer $action_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Action $action
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereActionParamId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereKey($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereValue($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereType($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereActionId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ActionParam whereUpdatedAt($value)
+ */
 class ActionParam extends Model
 {
     /**
