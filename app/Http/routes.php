@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'api/v1'], function () {
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth.basic'], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
 
