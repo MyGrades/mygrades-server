@@ -21,16 +21,17 @@ class University extends Model
     protected $primaryKey = "university_id";
 
     /**
+     * White-list of attributes to show in Array or JSON.
+     *
+     * @var array
+     */
+    protected $visible = ['university_id', 'published', 'name', 'updated_at', 'rules'];
+
+    /**
      * Get the rules for the university.
      */
     public function rules()
     {
         return $this->hasMany('App\Rule');
     }
-
-
-    // TODO: create Query Scope for active universities
-    // http://laravel.com/docs/5.1/eloquent#query-scopes
-
-    // TODO: mutator for date? ISO8601 ?
 }
