@@ -14,6 +14,7 @@ class CreateUniversitiesTable extends Migration
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->increments('university_id');
+            $table->boolean('published')->default(false);
             $table->string('short_name');
             $table->string('name');
             $table->string('sponsorship');
