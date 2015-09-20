@@ -60,6 +60,15 @@ class University extends Model
     protected $visible = ['university_id', 'published', 'name', 'updated_at', 'rules'];
 
     /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'published' => 'boolean',
+    ];
+
+    /**
      * Get the rules for the university.
      */
     public function rules()

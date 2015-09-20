@@ -84,8 +84,7 @@ class RuleSeeder extends Seeder {
         // create Rule for HSRM
         $hsrm->rules()->saveMany([
             $bachelor,
-            new Rule(['type' => 'master']),
-            new Rule(['type' => 'registeredTests'])
+            new Rule(['type' => 'master'])
         ]);
 
 
