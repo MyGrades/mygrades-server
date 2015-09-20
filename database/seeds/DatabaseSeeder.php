@@ -4,6 +4,7 @@ use App\Action;
 use App\ActionParam;
 use App\Rule;
 use App\University;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Flynsarmy\CsvSeeder\CsvSeeder;
@@ -57,6 +58,11 @@ class HochschulkompassSeeder extends CsvSeeder
     public function run()
     {
         parent::run();
+
+        DB::table('universities')->update([
+            'updated_at' => Carbon::now(),
+            'created_at' => Carbon::now()
+        ]);
     }
 }
 
@@ -72,6 +78,8 @@ class RuleSeeder extends Seeder {
         ]);
 
         $hsrm = University::find(333);
+        $hsrm->published = true;
+        $hsrm->save();
 
         // create Rule for HSRM
         $hsrm->rules()->saveMany([
@@ -126,8 +134,8 @@ class RuleSeeder extends Seeder {
         ]);
 
         $login->actionParams()->saveMany([
-            new ActionParam(['key' => 'asdf']),
-            new ActionParam(['key' => 'fdsa'])
+            new ActionParam(['key' => 'asdf', "type" => "username"]),
+            new ActionParam(['key' => 'fdsa', "type" => "password"])
         ]);
 
 

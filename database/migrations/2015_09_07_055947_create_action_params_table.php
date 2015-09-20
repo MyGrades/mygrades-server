@@ -16,6 +16,7 @@ class CreateActionParamsTable extends Migration
             $table->increments('action_param_id');
             $table->string('key');
             $table->string('value')->nullable();
+            $table->string('type')->nullable();
 
             $table->integer('action_id')->unsigned();
             $table->timestamps();
