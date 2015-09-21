@@ -36,7 +36,7 @@ class UniversityController extends Controller
     public function show(University $university)
     {
         if (Input::has('detailed') && Input::get('detailed') === "true") {
-            $university->load('rules.actions.actionParams');
+            $university->load(['rules.actions.actionParams', 'rules.transformerMappings']);
         }
         return $university;
     }
