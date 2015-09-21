@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Rule whereUniversityId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Rule whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Rule whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\TransformerMapping[] $transformerMappings
  */
 class Rule extends Model
 {
@@ -50,5 +51,13 @@ class Rule extends Model
     public function actions()
     {
         return $this->hasMany('App\Action');
+    }
+
+    /**
+     * Get the transformer mappings for the rule.
+     */
+    public function transformerMappings()
+    {
+        return $this->hasMany('App\TransformerMapping');
     }
 }

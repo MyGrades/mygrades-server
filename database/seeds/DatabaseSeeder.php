@@ -3,6 +3,7 @@
 use App\Action;
 use App\ActionParam;
 use App\Rule;
+use App\TransformerMapping;
 use App\University;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -126,7 +127,7 @@ class RuleSeeder extends Seeder {
             new Action([
                 'position' => 5,
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]/tbody/tr[contains(., "1120")]/td[5]',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]',
                 'parse_type' => 'XPATH'
             ]),
 
@@ -138,7 +139,38 @@ class RuleSeeder extends Seeder {
         ]);
 
 
-
+        $bachelor->transformerMappings()->saveMany([
+            new TransformerMapping([
+                'name' => 'name',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ]),
+            new TransformerMapping([
+                'name' => 'semester',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ]),
+            new TransformerMapping([
+                'name' => 'grade',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ]),
+            new TransformerMapping([
+                'name' => 'state',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ]),
+            new TransformerMapping([
+                'name' => 'credit_points',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ]),
+            new TransformerMapping([
+                'name' => 'link_to_overview',
+                'parse_expression' => '',
+                'parse_type' => 'XPATH'
+            ])
+        ]);
 
 
 
