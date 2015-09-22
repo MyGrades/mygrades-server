@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\University;
+use Carbon\Carbon;
 use Request;
 
 use App\Http\Requests;
@@ -26,10 +27,18 @@ class UniversityController extends Controller
     {
         $updatedAtServer = Request::header('Updated-At-Server');
 
-        if ($updatedAtServer == null) {
-            return University::all();
+        if ($updatedAtServer === null) {
+            if (Input::has('published') && Input::get('published') === "true") {
+                return University::published()->get();
+            } else {
+                return University::all();
+            }
         } else {
-            return University::newerThan($updatedAtServer)->get();
+            if (Input::has('published') && Input::get('published') === "true") {
+                return University::published()->newerThan($updatedAtServer)->get();
+            } else {
+                return University::newerThan($updatedAtServer)->get();
+            }
         }
     }
 
@@ -43,13 +52,13 @@ class UniversityController extends Controller
     {
         $updatedAtServer = Request::header('Updated-At-Server');
 
-        if ($university->updated_at > $updatedAtServer) {
+        if ($updatedAtServer === null || $university->updated_at->gt(Carbon::parse($updatedAtServer))) {
             if (Input::has('detailed') && Input::get('detailed') === "true") {
                 $university->load(['rules.actions.actionParams', 'rules.transformerMappings']);
             }
             return $university;
         }
 
-        return null;
+        return response(null, 304);
     }
 }

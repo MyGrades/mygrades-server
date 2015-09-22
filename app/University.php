@@ -102,4 +102,14 @@ class University extends Model
     public function scopeNewerThan($query, $updatedAtServer) {
         return $query->where('updated_at', '>', $updatedAtServer);
     }
+
+    /**
+     * Scope to test whether this university is published.
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query) {
+        return $query->where('published', 1);
+    }
 }
