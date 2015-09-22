@@ -91,4 +91,15 @@ class University extends Model
     public function getUpdatedAtServerAttribute() {
         return $this->updated_at->toDateTimeString();
     }
+
+    /**
+     * Scope to test whether this university is newer, compared to the given updatedAtServer timestamp.
+     *
+     * @param $query
+     * @param $updatedAtServer
+     * @return mixed
+     */
+    public function scopeNewerThan($query, $updatedAtServer) {
+        return $query->where('updated_at', '>', $updatedAtServer);
+    }
 }

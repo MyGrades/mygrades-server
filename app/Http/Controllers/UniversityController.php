@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\University;
-use Illuminate\Http\Request;
+use Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -24,7 +24,13 @@ class UniversityController extends Controller
      */
     public function index()
     {
-        return University::all();
+        $updatedAtServer = Request::header('Updated-At-Server');
+
+        if ($updatedAtServer == null) {
+            return University::all();
+        } else {
+            return University::newerThan($updatedAtServer)->get();
+        }
     }
 
     /**
@@ -35,9 +41,15 @@ class UniversityController extends Controller
      */
     public function show(University $university)
     {
-        if (Input::has('detailed') && Input::get('detailed') === "true") {
-            $university->load(['rules.actions.actionParams', 'rules.transformerMappings']);
+        $updatedAtServer = Request::header('Updated-At-Server');
+
+        if ($university->updated_at > $updatedAtServer) {
+            if (Input::has('detailed') && Input::get('detailed') === "true") {
+                $university->load(['rules.actions.actionParams', 'rules.transformerMappings']);
+            }
+            return $university;
         }
-        return $university;
+
+        return null;
     }
 }
