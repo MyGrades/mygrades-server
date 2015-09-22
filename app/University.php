@@ -57,7 +57,7 @@ class University extends Model
      *
      * @var array
      */
-    protected $visible = ['university_id', 'published', 'name', 'updated_at', 'rules'];
+    protected $visible = ['university_id', 'published', 'name', 'updated_at_server', 'rules'];
 
     /**
      * The attributes that should be casted to native types.
@@ -69,10 +69,26 @@ class University extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['updated_at_server'];
+
+    /**
      * Get the rules for the university.
      */
     public function rules()
     {
         return $this->hasMany('App\Rule');
+    }
+
+    /**
+     * Custom attribute for updated_at_server column.
+     *
+     * @return string
+     */
+    public function getUpdatedAtServerAttribute() {
+        return $this->updated_at->toDateTimeString();
     }
 }
