@@ -25,20 +25,16 @@ class UniversityController extends Controller
      */
     public function index()
     {
-        $updatedAtServer = Request::header('Updated-At-Server');
+        $updatedAtServerPublished = Request::header('Updated-At-Server-Published');
+        $updatedAtServerUnpublished = Request::header('Updated-At-Server-Unpublished');
 
-        if ($updatedAtServer === null) {
-            if (Input::has('published') && Input::get('published') === "true") {
-                return University::published()->get();
-            } else {
-                return University::all();
-            }
+        if (Input::has('published') && Input::get('published') === "true") {
+            return University::published(true)->newerThan($updatedAtServerPublished)->get();
         } else {
-            if (Input::has('published') && Input::get('published') === "true") {
-                return University::published()->newerThan($updatedAtServer)->get();
-            } else {
-                return University::newerThan($updatedAtServer)->get();
-            }
+            // get all universities, but differentiate between published and unpublished
+            $published = University::published(true)->newerThan($updatedAtServerPublished)->get();
+            $unpublished = University::published(false)->newerThan($updatedAtServerUnpublished)->get();
+            return $published->merge($unpublished)->all();
         }
     }
 
