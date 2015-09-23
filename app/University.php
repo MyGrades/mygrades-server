@@ -100,6 +100,10 @@ class University extends Model
      * @return mixed
      */
     public function scopeNewerThan($query, $updatedAtServer) {
+        if ($updatedAtServer === null) {
+            return $query;
+        }
+
         return $query->where('updated_at', '>', $updatedAtServer);
     }
 
@@ -107,9 +111,10 @@ class University extends Model
      * Scope to test whether this university is published.
      *
      * @param $query
+     * @param published
      * @return mixed
      */
-    public function scopePublished($query) {
-        return $query->where('published', 1);
+    public function scopePublished($query, $published) {
+        return $query->where('published', $published);
     }
 }
