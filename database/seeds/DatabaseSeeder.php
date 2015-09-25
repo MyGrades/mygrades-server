@@ -92,8 +92,7 @@ class RuleSeeder extends Seeder {
         $login = new Action([
             'position' => 1,
             'method' => 'POST',
-            'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href',
-            'parse_type' => 'XPATH'
+            'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href'
         ]);
 
         // add actions
@@ -102,33 +101,28 @@ class RuleSeeder extends Seeder {
                 'position' => 0,
                 'method' => 'GET',
                 'url' => 'https://qis.hs-rm.de/',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action'
             ]),
             $login,
             new Action([
                 'position' => 2,
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href'
             ]),
             new Action([
                 'position' => 3,
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/a[1]/@href',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/ul/li/a[1]/@href',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 5,
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]'
             ]),
 
         ]);
@@ -141,34 +135,32 @@ class RuleSeeder extends Seeder {
 
         $bachelor->transformerMappings()->saveMany([
             new TransformerMapping([
+                'name' => 'exam_id',
+                'parse_expression' => '//td[1]'
+            ]),
+            new TransformerMapping([
                 'name' => 'name',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//td[2]'
             ]),
             new TransformerMapping([
                 'name' => 'semester',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//td[3]'
             ]),
             new TransformerMapping([
                 'name' => 'grade',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//td[5]'
             ]),
             new TransformerMapping([
                 'name' => 'state',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//td[6]'
             ]),
             new TransformerMapping([
                 'name' => 'credit_points',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'parse_expression' => '//td[7]'
             ]),
             new TransformerMapping([
-                'name' => 'link_to_overview',
-                'parse_expression' => '',
-                'parse_type' => 'XPATH'
+                'name' => 'iterator',
+                'parse_expression' => "//tr[./td[@class != 'qis_kontoOnTop']]"
             ])
         ]);
 
