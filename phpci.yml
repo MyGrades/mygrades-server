@@ -11,10 +11,6 @@ build_settings:
         user: "dev_user"
         pass: "NzFEXyk8EyzWiaL9ZgnZj"
 
-setup:
-    composer:
-        action: "install"
-
 test:
     php_unit:
         config:
