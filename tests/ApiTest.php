@@ -9,6 +9,11 @@ class ApiTest extends TestCase
 {
     protected $apiPrefix = "/api/v1";
 
+    public function testCronjobAutobuild()
+    {
+        $this->assertTrue(true);
+    }
+
     /**
      * A basic functional test example.
      *
