@@ -18,7 +18,6 @@ class CreateActionsTable extends Migration
             $table->string('method');
             $table->text('url')->nullable();
             $table->text('parse_expression');
-            $table->string('parse_type');
 
             $table->integer('rule_id')->unsigned();
             $table->timestamps();

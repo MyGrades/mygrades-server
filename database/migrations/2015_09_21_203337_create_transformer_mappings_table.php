@@ -16,7 +16,6 @@ class CreateTransformerMappingsTable extends Migration
             $table->increments('transformer_mapping_id');
             $table->string('name');
             $table->text('parse_expression');
-            $table->string('parse_type');
             $table->integer('rule_id')->unsigned();
             $table->timestamps();
 
