@@ -160,7 +160,7 @@ class RuleSeeder extends Seeder {
             ]),
             new TransformerMapping([
                 'name' => 'iterator',
-                'parse_expression' => "//tr[./td[not(starts-with(@class, 'qis_konto'))]]"
+                'parse_expression' => "//tr[not(./td[contains(text(), 'ECTS-Kontostand')]) and ./td[not(starts-with(@class, 'qis_konto'))]]"
             ])
         ]);
 
