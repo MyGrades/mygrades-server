@@ -36,6 +36,12 @@ class Rule extends Model
      */
     protected $primaryKey = "rule_id";
 
+    /**
+     * Black-list of attributes to show not in Array or JSON.
+     *
+     * @var array
+     */
+    protected $hidden = ['updated_at', 'created_at'];
 
     /**
      * Get the university that owns the rule.

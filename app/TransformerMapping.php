@@ -39,6 +39,13 @@ class TransformerMapping extends Model
     protected $primaryKey = "transformer_mapping_id";
 
     /**
+     * Black-list of attributes to show not in Array or JSON.
+     *
+     * @var array
+     */
+    protected $hidden = ['updated_at', 'created_at'];
+
+    /**
      * Get the rule that owns the transformer mapping.
      */
     public function rule()

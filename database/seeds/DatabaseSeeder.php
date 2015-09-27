@@ -75,7 +75,10 @@ class RuleSeeder extends Seeder {
     {
         // create Rule bachelor
         $bachelor = new Rule([
-                'type' => 'bachelor'
+            'type' => 'bachelor',
+            'semester_format' => 'semester',
+            'semester_pattern' => '(^\w+)\s*([0-9]+)',
+            'grade_factor' => 1
         ]);
 
         $hsrm = University::find(333);
@@ -157,6 +160,14 @@ class RuleSeeder extends Seeder {
             new TransformerMapping([
                 'name' => 'credit_points',
                 'parse_expression' => '//td[7]'
+            ]),
+            new TransformerMapping([
+                'name' => 'annotation',
+                'parse_expression' => '//td[8]'
+            ]),
+            new TransformerMapping([
+                'name' => 'attempt',
+                'parse_expression' => '//td[9]'
             ]),
             new TransformerMapping([
                 'name' => 'iterator',
