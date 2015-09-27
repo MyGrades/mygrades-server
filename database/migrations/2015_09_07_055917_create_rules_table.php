@@ -14,7 +14,11 @@ class CreateRulesTable extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->increments('rule_id');
-            $table->string('type'); // TODO: table for type?
+            $table->string('type');
+            $table->string('semester_format');
+            $table->string('semester_pattern');
+            $table->double('grade_factor');
+
             $table->integer('university_id')->unsigned();
             $table->timestamps();
 

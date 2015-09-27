@@ -39,6 +39,13 @@ class ActionParam extends Model
     protected $primaryKey = "action_param_id";
 
     /**
+     * Black-list of attributes to show not in Array or JSON.
+     *
+     * @var array
+     */
+    protected $hidden = ['updated_at', 'created_at'];
+
+    /**
      * Get the action that owns the action param.
      */
     public function action()
