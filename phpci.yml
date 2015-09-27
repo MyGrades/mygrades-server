@@ -6,6 +6,7 @@ build_settings:
         - "_ide_helper.php"
         - "bootstrap"
         - "database"
+        - "resources"
     mysql:
         host: "localhost"
         user: "dev_user"
