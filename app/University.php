@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * App\University
  *
@@ -88,7 +89,8 @@ class University extends Model
      *
      * @return string
      */
-    public function getUpdatedAtServerAttribute() {
+    public function getUpdatedAtServerAttribute()
+    {
         return $this->updated_at->toDateTimeString();
     }
 
@@ -99,7 +101,8 @@ class University extends Model
      * @param $updatedAtServer
      * @return mixed
      */
-    public function scopeNewerThan($query, $updatedAtServer) {
+    public function scopeNewerThan($query, $updatedAtServer)
+    {
         if ($updatedAtServer === null) {
             return $query;
         }
@@ -114,7 +117,8 @@ class University extends Model
      * @param published
      * @return mixed
      */
-    public function scopePublished($query, $published) {
+    public function scopePublished($query, $published)
+    {
         return $query->where('published', $published);
     }
 }
