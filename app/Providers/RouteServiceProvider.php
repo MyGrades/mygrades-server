@@ -31,8 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('university', '[0-9]+');
 
         // route-model bindings
-        $router->model('university', 'App\University', function()
-        {
+        $router->model('university', 'App\University', function () {
             throw new ModelNotFoundException;
         });
 
