@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth.basic' => Middleware\BasicAuthMiddleware::class
+        'auth.basic' => Middleware\BasicAuthMiddleware::class,
+        'logging' => Middleware\LoggingMiddleware::class
     ];
 }
