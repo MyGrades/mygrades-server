@@ -91,8 +91,7 @@ class HSRMSeeder extends Seeder {
 
         // create Rule for HSRM
         $hsrm->rules()->saveMany([
-            $bachelor,
-            new Rule(['type' => 'master'])
+            $bachelor
         ]);
 
 
@@ -205,8 +204,7 @@ class TUClausthalSeeder extends Seeder {
 
         // create Rule for HSRM
         $clausthal->rules()->saveMany([
-            $bachelor,
-            new Rule(['type' => 'master'])
+            $bachelor
         ]);
 
 
@@ -314,8 +312,7 @@ class TUFreiberg extends Seeder {
 
         // create Rule for HSRM
         $uni->rules()->saveMany([
-            $bachelor,
-            new Rule(['type' => 'master'])
+            $bachelor
         ]);
 
 
@@ -432,8 +429,7 @@ class FHBingen extends Seeder {
 
         // create Rule for HSRM
         $uni->rules()->saveMany([
-            $bachelor,
-            new Rule(['type' => 'master'])
+            $bachelor
         ]);
 
 
