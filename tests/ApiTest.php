@@ -14,14 +14,14 @@ class ApiTest extends TestCase
      */
     public function testPublishedUniversities()
     {
-        $universities = University::published(true)->get();
-        foreach($universities as $university)
+        University::published(true)->get()->each(function ($university)
         {
             $this->assertTrue($university->published === true);
             $this->assertGreaterThan(0, $university->rules->count());
-            foreach($university->rules as $rule) {
+
+            $university->rules->each(function ($rule) {
                 $this->assertGreaterThan(0, $rule->actions->count());
-            }
-        }
+            });
+        });
     }
 }
