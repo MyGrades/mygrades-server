@@ -17,7 +17,7 @@ class BasicAuthMiddleware
     public function handle($request, Closure $next)
     {
         // check current environment
-        if (App::environment() !== "development") {
+        if (App::environment() !== "development" && App::environment() !== "testing") {
             // check given credentials
             if ($request->getUser() !== "MyGradesApi" || $request->getPassword() !== "AxPMiBxtgZXuGF28fVme") {
                 return response()->json(['error' => 'Invalid credentials.'], 401)
