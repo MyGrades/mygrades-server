@@ -40,7 +40,7 @@ class HochschulkompassSeeder extends CsvSeeder
     public function __construct()
     {
         $this->table = 'universities';
-        $this->filename = base_path().'/database/seeds/hochschulkompass-alle-hochschulen.tsv'; // TODO: update path?
+        $this->filename = base_path().'/database/seeds/hochschulkompass-alle-hochschulen.tsv';
         $this->csv_delimiter = "\t";
         $this->offset_rows = 1;
         $this->mapping = [
