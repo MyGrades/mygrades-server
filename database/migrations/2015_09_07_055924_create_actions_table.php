@@ -15,6 +15,7 @@ class CreateActionsTable extends Migration
         Schema::create('actions', function (Blueprint $table) {
             $table->increments('action_id');
             $table->integer('position')->unsigned();
+            $table->string('type');
             $table->string('method');
             $table->text('url')->nullable();
             $table->text('parse_expression');
