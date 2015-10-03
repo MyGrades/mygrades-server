@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class LoggingMiddleware
             'request_method' => $request->method(),
             'request_length' => $request->server('CONTENT_LENGTH'),
             'response_code' => $response->status(),
+            'created_at' => Carbon::now()
         ]);
         return $response;
     }
