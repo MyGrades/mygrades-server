@@ -33,6 +33,7 @@ class HSRMSeeder extends Seeder {
 
         $login = new Action([
             'position' => 1,
+            'type' => 'normal',
             'method' => 'POST',
             'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href'
         ]);
@@ -41,6 +42,7 @@ class HSRMSeeder extends Seeder {
         $bachelor->actions()->saveMany([
             new Action([
                 'position' => 0,
+                'type' => 'normal',
                 'method' => 'GET',
                 'url' => 'https://qis.hs-rm.de/',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action'
@@ -48,25 +50,41 @@ class HSRMSeeder extends Seeder {
             $login,
             new Action([
                 'position' => 2,
+                'type' => 'normal',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href'
             ]),
             new Action([
                 'position' => 3,
+                'type' => 'normal',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
+                'type' => 'normal',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 5,
+                'type' => 'table_grades',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]'
             ]),
 
+            new Action([
+                'position' => 6,
+                'type' => 'table_overview',
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]/tr[contains(./td[1], "{{{exam_id}}}") and ./td[./a]]/td/a/@href'
+            ]),
+            new Action([
+                'position' => 7,
+                'type' => 'table_overview',
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[3]'
+            ]),
         ]);
 
         $login->actionParams()->saveMany([
