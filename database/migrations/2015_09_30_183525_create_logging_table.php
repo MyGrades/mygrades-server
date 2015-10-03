@@ -21,7 +21,7 @@ class CreateLoggingTable extends Migration
 
             $table->integer('response_code');
 
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at');
         });
     }
 
