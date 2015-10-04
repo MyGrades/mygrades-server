@@ -77,7 +77,7 @@ class HSRMSeeder extends Seeder {
                 'position' => 6,
                 'type' => 'table_overview',
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]/tr[contains(./td[1], "{{{exam_id}}}") and ./td[./a]]/td/a/@href'
+                'parse_expression' => "//*[@id='wrapper']/div[6]/div[2]/form/table[2]//tr[./td[contains(text(), '###exam_id###')] and ./td[./a]]/td/a/@href"
             ]),
             new Action([
                 'position' => 7,
@@ -129,7 +129,37 @@ class HSRMSeeder extends Seeder {
             new TransformerMapping([
                 'name' => 'iterator',
                 'parse_expression' => "//tr[not(./td[contains(text(), 'ECTS-Kontostand')]) and ./td[not(starts-with(@class, 'qis_konto'))]]"
-            ])
+            ]),
+
+            // Transformer overview
+            new TransformerMapping([
+                'name' => 'overview_section1',
+                'parse_expression' => "//tr[4]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section2',
+                'parse_expression' => "//tr[5]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section3',
+                'parse_expression' => "//tr[6]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section4',
+                'parse_expression' => "//tr[7]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section5',
+                'parse_expression' => "//tr[8]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_participants',
+                'parse_expression' => "//tr[9]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_average',
+                'parse_expression' => "//tr[10]/td[2]/text()"
+            ]),
         ]);
     }
 }
