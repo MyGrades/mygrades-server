@@ -20,6 +20,7 @@ class CreateRulesTable extends Migration
             $table->integer('semester_start_summer')->nullable();
             $table->integer('semester_start_winter')->nullable();
             $table->double('grade_factor')->default(1); // set default factor to 1
+            $table->boolean('overview')->default(false);
 
             $table->integer('university_id')->unsigned();
             $table->timestamps();

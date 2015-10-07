@@ -18,7 +18,8 @@ class HSRMSeeder extends Seeder {
             'type' => 'bachelor',
             'semester_format' => 'semester',
             'semester_pattern' => '(^\w+)\s*([0-9]+)',
-            'grade_factor' => 1
+            'grade_factor' => 1,
+            'overview' => true
         ]);
 
         $hsrm = University::find(333);

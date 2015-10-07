@@ -45,6 +45,15 @@ class Rule extends Model
     protected $hidden = ['updated_at', 'created_at'];
 
     /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'overview' => 'boolean',
+    ];
+
+    /**
      * Get the university that owns the rule.
      */
     public function university()
