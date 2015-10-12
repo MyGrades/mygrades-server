@@ -128,6 +128,10 @@ class HSRMSeeder extends Seeder {
                 'parse_expression' => '//td[9]'
             ]),
             new TransformerMapping([
+                'name' => 'overview_possible',
+                'parse_expression' => 'boolean(//a)'
+            ]),
+            new TransformerMapping([
                 'name' => 'iterator',
                 'parse_expression' => "//tr[not(./td[contains(text(), 'ECTS-Kontostand')]) and ./td[not(starts-with(@class, 'qis_konto'))]]"
             ]),
