@@ -48,6 +48,7 @@ class ApiTest extends TestCase
 
     /**
      * Checks if the given university has all necessary attributes.
+     * This method will be called for each university from other tests.
      *
      * @param $university
      */
