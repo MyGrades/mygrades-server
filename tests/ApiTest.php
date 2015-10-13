@@ -4,6 +4,7 @@ use App\University;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Carbon\Carbon;
 
 class ApiTest extends TestCase
 {
@@ -123,7 +124,7 @@ class ApiTest extends TestCase
             $this->assertTrue($usernameIsPresent, "Username is present");
             $this->assertTrue($passwordIsPresent, "Password is present");
 
-            // if overview == true, check for actions with type = table_overview
+            // if overview === true, search for actions with type === table_overview
             if ($rule->overview === true)
             {
                 $tableOverviewIsPresent = false;
@@ -140,6 +141,67 @@ class ApiTest extends TestCase
         }
     }
 
+    /**
+     * Test if consecutive calls to published universities returns only new ones.
+     *
+     * 1. Get all published universities and the latest updated_at timestamp
+     * 2. Get all published universities -> expect empty array
+     * 3. touch hsrm to updated its timestamp
+     * 4. Get all published universities -> expect 1 university
+     */
+    public function testTimestampPublishedOnly()
+    {
+        // get all published universities
+        $response = $this->call('GET', $this->apiPrefix . '/universities?published=true');
+        $universities = $this->parseJson($response);
+
+        // get latest timestamp
+        $latestTimestamp = $this->getLatestTimestamp($universities);
+
+        if ($latestTimestamp !== null)
+        {
+            // get all published universities with Updated-At-Server header parameter
+            $response = $this->call('GET', $this->apiPrefix . '/universities?published=true', [], [], [], $server = [
+                'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
+            ]);
+
+            // check if array is empty
+            $universities = $this->parseJson($response);
+            $this->assertEquals(0, count($universities));
+
+            // update timestamp for hsrm
+            $hsrm = \App\University::find(333);
+            $hsrm->touch();
+
+            // get all published universities with Updated-At-Server header parameter
+            $response = $this->call('GET', $this->apiPrefix . '/universities?published=true', [], [], [], $server = [
+                'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
+            ]);
+
+            // check if array contains 1 university
+            $universities = $this->parseJson($response);
+            $this->assertEquals(1, count($universities));
+        }
+    }
+
+    /**
+     * Gets the latest timestamp for a list of universities.
+     *
+     * @param $universities
+     * @return null|static
+     */
+    private function getLatestTimestamp($universities)
+    {
+        $latestTimestamp = null;
+        foreach ($universities as $university)
+        {
+            $actTimestamp = Carbon::parse($university->updated_at_server);
+            if ($latestTimestamp === null || $actTimestamp->gt($latestTimestamp)) {
+                $latestTimestamp = $actTimestamp;
+            }
+        }
+        return $latestTimestamp;
+    }
 
     /**
      * Parse json to a php object.
