@@ -169,18 +169,18 @@ class ApiTest extends TestCase
             $universities = $this->parseJson($response);
             $this->assertEquals(0, count($universities));
 
-            // update timestamp for hsrm
-            $hsrm = \App\University::find(333);
-            $hsrm->touch();
-
-            // get all published universities with Updated-At-Server header parameter
-            $response = $this->call('GET', $this->apiPrefix . '/universities?published=true', [], [], [], $server = [
-                'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
-            ]);
-
-            // check if array contains 1 university
-            $universities = $this->parseJson($response);
-            $this->assertEquals(1, count($universities));
+            // get month to month back from latestTimestamp and check if retrieved universities are newer
+            for ($i=1; $i <= 12; $i++) {
+                $latestTimestamp->subMonth();
+                $response = $this->call('GET', $this->apiPrefix . '/universities?published=true', [], [], [], $server = [
+                    'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
+                ]);
+                $universities = $this->parseJson($response);
+                foreach($universities as $university) {
+                    $updated_at_server_current = Carbon::parse($university->updated_at_server);
+                    $this->assertTrue($updated_at_server_current->gt($latestTimestamp));
+                }
+            }
         }
     }
 
