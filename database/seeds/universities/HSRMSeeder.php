@@ -45,7 +45,7 @@ class HSRMSeeder extends Seeder {
                 'position' => 0,
                 'type' => 'normal',
                 'method' => 'GET',
-                'url' => 'https://qis.hs-rm.de/',
+                'url' => 'https://qis.hs-rm.de/qisserver/rds?state=user&type=0',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action'
             ]),
             $login,
