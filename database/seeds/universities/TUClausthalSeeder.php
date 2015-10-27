@@ -15,7 +15,7 @@ class TUClausthalSeeder extends Seeder {
     {
         // create Rule bachelor
         $bachelor = new Rule([
-            'type' => 'bachelor',
+            'name' => 'Allgemein',
             'semester_format' => 'date',
             'semester_pattern' => '\d{2}\.(\d{2})\.(\d{4})',
             'semester_start_summer' => 4,
