@@ -15,7 +15,7 @@ class FHBingen extends Seeder {
     {
         // create Rule bachelor
         $bachelor = new Rule([
-            'type' => 'bachelor',
+            'name' => 'Allgemein',
             'semester_format' => 'semester',
             'semester_pattern' => '(^\w+)\s*([0-9]+)',
             'grade_factor' => 1
