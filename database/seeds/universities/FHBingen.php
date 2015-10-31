@@ -14,11 +14,12 @@ class FHBingen extends Seeder {
     public function run()
     {
         // create Rule bachelor
-        $bachelor = new Rule([
+        $general = new Rule([
             'name' => 'Allgemein',
             'semester_format' => 'semester',
             'semester_pattern' => '(^\w+)\s*([0-9]+)',
-            'grade_factor' => 1
+            'grade_factor' => 1,
+            'overview' => false
         ]);
 
         $uni = University::find(65);
@@ -27,43 +28,49 @@ class FHBingen extends Seeder {
 
         // create Rule for HSRM
         $uni->rules()->saveMany([
-            $bachelor
+            $general
         ]);
 
 
         $login = new Action([
             'position' => 1,
             'method' => 'POST',
+            'type' => 'normal',
             'parse_expression' => '//*[@id="makronavigation"]/ul/a[3]/@href'
         ]);
 
         // add actions
-        $bachelor->actions()->saveMany([
+        $general->actions()->saveMany([
             new Action([
                 'position' => 0,
                 'method' => 'GET',
                 'url' => 'https://qispos.vw.fh-bingen.de/',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[7]/div[2]/div/form/@action'
             ]),
             $login,
             new Action([
                 'position' => 2,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[8]/div[2]/div/form/div/ul/li[4]/a/@href'
             ]),
             new Action([
                 'position' => 3,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[8]/div[2]/form/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[8]/div[2]/form/ul/li/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 5,
                 'method' => 'GET',
+                'type' => 'table_grades',
                 'parse_expression' => '//*[@id="wrapper"]/div[8]/div[2]/form/table[1]'
             ]),
 
@@ -75,7 +82,7 @@ class FHBingen extends Seeder {
         ]);
 
 
-        $bachelor->transformerMappings()->saveMany([
+        $general->transformerMappings()->saveMany([
             new TransformerMapping([
                 'name' => 'name',
                 'parse_expression' => '//td[1]'

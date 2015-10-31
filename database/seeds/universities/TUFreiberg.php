@@ -14,59 +14,78 @@ class TUFreiberg extends Seeder {
     public function run()
     {
         // create Rule bachelor
-        $bachelor = new Rule([
+        $general = new Rule([
             'name' => 'Allgemein',
             'semester_format' => 'semester',
             'semester_pattern' => '(^\w+)\s*([0-9]+)',
-            'grade_factor' => 1
+            'grade_factor' => 1,
+            'overview' => true
         ]);
 
         $uni = University::find(141);
         $uni->published = true;
         $uni->save();
 
-        // create Rule for HSRM
+        // create Rule
         $uni->rules()->saveMany([
-            $bachelor
+            $general
         ]);
 
 
         $login = new Action([
             'position' => 1,
             'method' => 'POST',
+            'type' => 'normal',
             'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href'
         ]);
 
         // add actions
-        $bachelor->actions()->saveMany([
+        $general->actions()->saveMany([
             new Action([
                 'position' => 0,
                 'method' => 'GET',
-                'url' => 'https://sbweb2.tu-freiberg.de/',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div[2]/form/@action'
+                'url' => 'https://sbweb2.tu-freiberg.de/qisserver/rds?state=user&type=0',
+                'type' => 'normal',
+                'parse_expression' => '//*[@id="wrapper"]/div[5]/div[2]/div/div[2]/form/@action'
             ]),
             $login,
             new Action([
                 'position' => 2,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href'
             ]),
             new Action([
                 'position' => 3,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
                 'method' => 'GET',
+                'type' => 'normal',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 5,
                 'method' => 'GET',
+                'type' => 'table_grades',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]'
             ]),
 
+            new Action([
+                'position' => 6,
+                'type' => 'table_overview',
+                'method' => 'GET',
+                'parse_expression' => "//*[@id='wrapper']/div[6]/div[2]/form/table[2]//tr[./td[contains(text(), '###exam_id###')] and ./td[./a]]/td/a/@href"
+            ]),
+            new Action([
+                'position' => 7,
+                'type' => 'table_overview',
+                'method' => 'GET',
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[3]'
+            ]),
         ]);
 
         $login->actionParams()->saveMany([
@@ -75,7 +94,7 @@ class TUFreiberg extends Seeder {
         ]);
 
 
-        $bachelor->transformerMappings()->saveMany([
+        $general->transformerMappings()->saveMany([
             new TransformerMapping([
                 'name' => 'exam_id',
                 'parse_expression' => '//td[1]'
@@ -112,11 +131,44 @@ class TUFreiberg extends Seeder {
                 'name' => 'exam_date',
                 'parse_expression' => '//td[9]'
             ]),
-
+            new TransformerMapping([
+                'name' => 'overview_possible',
+                'parse_expression' => 'boolean(//a)'
+            ]),
             new TransformerMapping([
                 'name' => 'iterator',
                 'parse_expression' => "//tr[./td[not(starts-with(@class, 'qis_konto'))]]"
-            ])
+            ]),
+
+            // Transformer overview
+            new TransformerMapping([
+                'name' => 'overview_section1',
+                'parse_expression' => "//tr[4]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section2',
+                'parse_expression' => "//tr[5]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section3',
+                'parse_expression' => "//tr[6]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section4',
+                'parse_expression' => "//tr[7]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section5',
+                'parse_expression' => "//tr[8]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_participants',
+                'parse_expression' => "//tr[9]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_average',
+                'parse_expression' => "//tr[10]/td[2]/text()"
+            ]),
         ]);
     }
 }
