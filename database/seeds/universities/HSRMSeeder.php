@@ -14,7 +14,7 @@ class HSRMSeeder extends Seeder {
     public function run()
     {
         // create Rule bachelor
-        $bachelor = new Rule([
+        $general = new Rule([
             'name' => 'Allgemein',
             'semester_format' => 'semester',
             'semester_pattern' => '(^\w+)\s*([0-9]+)',
@@ -28,7 +28,7 @@ class HSRMSeeder extends Seeder {
 
         // create Rule for HSRM
         $hsrm->rules()->saveMany([
-            $bachelor
+            $general
         ]);
 
 
@@ -40,7 +40,7 @@ class HSRMSeeder extends Seeder {
         ]);
 
         // add actions
-        $bachelor->actions()->saveMany([
+        $general->actions()->saveMany([
             new Action([
                 'position' => 0,
                 'type' => 'normal',
@@ -94,7 +94,7 @@ class HSRMSeeder extends Seeder {
         ]);
 
 
-        $bachelor->transformerMappings()->saveMany([
+        $general->transformerMappings()->saveMany([
             new TransformerMapping([
                 'name' => 'exam_id',
                 'parse_expression' => '//td[1]'
