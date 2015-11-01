@@ -14,13 +14,14 @@ class TUClausthalSeeder extends Seeder {
     public function run()
     {
         // create Rule bachelor
-        $bachelor = new Rule([
+        $general = new Rule([
             'name' => 'Allgemein',
             'semester_format' => 'date',
             'semester_pattern' => '\d{2}\.(\d{2})\.(\d{4})',
             'semester_start_summer' => 4,
             'semester_start_winter' => 10,
-            'grade_factor' => 0.01
+            'grade_factor' => 0.01,
+            'overview' => false
         ]);
 
         $clausthal = University::find(89);
@@ -29,20 +30,22 @@ class TUClausthalSeeder extends Seeder {
 
         // create Rule for HSRM
         $clausthal->rules()->saveMany([
-            $bachelor
+            $general
         ]);
 
 
         $login = new Action([
             'position' => 1,
+            'type' => 'normal',
             'method' => 'POST',
             'parse_expression' => '//*[@id="navbox"]/dl/dd[2]/a/@href'
         ]);
 
         // add actions
-        $bachelor->actions()->saveMany([
+        $general->actions()->saveMany([
             new Action([
                 'position' => 0,
+                'type' => 'normal',
                 'method' => 'GET',
                 'url' => 'https://www.studierenplus.tu-clausthal.de/service/online-pruefungsanmeldung/login/',
                 'parse_expression' => '//*[@id="inhalt"]/div[2]/form/@action'
@@ -50,16 +53,19 @@ class TUClausthalSeeder extends Seeder {
             $login,
             new Action([
                 'position' => 2,
+                'type' => 'normal',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="inhalt"]/div[3]/form/div/ul/li[3]/a/@href'
             ]),
             new Action([
                 'position' => 3,
+                'type' => 'normal',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="inhalt"]/form/ul/li/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
+                'type' => 'table_grades',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="inhalt"]/form/table[2]'
             ])
@@ -71,7 +77,7 @@ class TUClausthalSeeder extends Seeder {
         ]);
 
 
-        $bachelor->transformerMappings()->saveMany([
+        $general->transformerMappings()->saveMany([
             new TransformerMapping([
                 'name' => 'exam_id',
                 'parse_expression' => '//td[1]'
