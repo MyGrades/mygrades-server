@@ -19,7 +19,7 @@ class BasicAuthMiddleware
         // check current environment
         if (App::environment() !== "development" && App::environment() !== "testing") {
             // check given credentials
-            if ($request->getUser() !== "MyGradesApi" || $request->getPassword() !== "AxPMiBxtgZXuGF28fVme") {
+            if ($request->getUser() !== "MyGrades" || $request->getPassword() !== "v#P3.qMXnCLH8@CT3YcJGxFAvpR]YeZKm") {
                 return response()->json(['error' => 'Invalid credentials.'], 401)
                     ->header('WWW-Authenticate', 'Basic');
             }
