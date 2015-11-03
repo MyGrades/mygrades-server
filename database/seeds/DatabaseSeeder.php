@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FHBingen::class);
         $this->call(FernuniHagenSeeder::class);
         $this->call(UniTrierSeeder::class);
+        $this->call(FHDarmstadt::class);
 
         Model::reguard();
     }
