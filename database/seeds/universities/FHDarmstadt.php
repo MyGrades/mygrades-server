@@ -148,16 +148,28 @@ class FHDarmstadt extends Seeder {
                 'parse_expression' => "//tr[5]/td[2]/text()"
             ]),
             new TransformerMapping([
-                'name' => 'overview_section3',
+                'name' => 'overview_section2',
                 'parse_expression' => "//tr[6]/td[2]/text()"
             ]),
             new TransformerMapping([
-                'name' => 'overview_section4',
+                'name' => 'overview_section3',
                 'parse_expression' => "//tr[7]/td[2]/text()"
             ]),
             new TransformerMapping([
-                'name' => 'overview_section5',
+                'name' => 'overview_section3',
                 'parse_expression' => "//tr[8]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section3',
+                'parse_expression' => "//tr[9]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section4',
+                'parse_expression' => "//tr[10]/td[2]/text()"
+            ]),
+            new TransformerMapping([
+                'name' => 'overview_section5',
+                'parse_expression' => "//tr[11]/td[2]/text()"
             ]),
             new TransformerMapping([
                 'name' => 'overview_participants',
