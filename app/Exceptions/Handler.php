@@ -42,6 +42,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        // Catch specific Exceptions and return a custom error message
+        if ($request->isJson()) {
+            if ($e instanceof ModelNotFoundException) {
+                return response()->json([
+                    'error' => 'Resource could not be found.'
+                ], 404);
+            }
+        }
+
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }

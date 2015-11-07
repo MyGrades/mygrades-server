@@ -14,7 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        $this->call(HochschulkompassSeeder::class);
+
+        $this->call(HSRMSeeder::class);
+        $this->call(TUClausthalSeeder::class);
+        $this->call(TUFreiberg::class);
+        $this->call(FHBingen::class);
+        $this->call(FernuniHagenSeeder::class);
+        $this->call(UniTrierSeeder::class);
+        $this->call(FHDarmstadt::class);
 
         Model::reguard();
     }
