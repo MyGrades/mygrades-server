@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Laravel</title>
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+    <style>
+        html {
+            height: 100%;
+        }
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+        body {
+            background-color: #8BC34A;
+            height: 100%;
+        }
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+        .mygrades-wrapper {
+            height: 100%;
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+        #logo {
+            max-width: 50%;
+            display: inline-block;
+            margin: 0 auto;
+        }
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
+        #button {
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+<div class="valign-wrapper mygrades-wrapper">
+    <div class="valign">
+        <img id="logo" src="img/mygrades-logo.svg" class="responsive-img" alt="MyGrades">
+        <br>
+        <a href="https://play.google.com/apps/testing/de.mygrades" id="button">Werde jetzt Beta-Tester!</a>
+    </div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+</body>
 </html>
