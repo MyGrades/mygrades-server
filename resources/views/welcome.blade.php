@@ -43,7 +43,7 @@
     <div class="valign">
         <img id="logo" src="img/mygrades-logo.svg" class="responsive-img" alt="MyGrades">
         <br>
-        <a href="#" id="button">Werde jetzt Beta-Tester!</a>
+        <a href="https://play.google.com/apps/testing/de.mygrades" id="button">Werde jetzt Beta-Tester!</a>
     </div>
 </div>
 
