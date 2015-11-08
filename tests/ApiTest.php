@@ -71,7 +71,7 @@ class ApiTest extends TestCase
             $passwordIsPresent = false;
 
             $this->assertObjectHasAttribute("rule_id", $rule);
-            $this->assertObjectHasAttribute("type", $rule);
+            $this->assertObjectHasAttribute("name", $rule);
             $this->assertObjectHasAttribute("semester_format", $rule);
             $this->assertObjectHasAttribute("semester_pattern", $rule);
             $this->assertObjectHasAttribute("semester_start_summer", $rule);
