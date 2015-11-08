@@ -135,7 +135,7 @@ class FHDarmstadt extends Seeder {
             ]),
             new TransformerMapping([
                 'name' => 'iterator',
-                'parse_expression' => "//tr[./td[starts-with(@class, 'tabelle1_')]]"
+                'parse_expression' => "//tr[./td[starts-with(@class, 'tabelle1_')] and not(./td[contains(text(), '. Semester')])]"
             ]),
 
             // Transformer overview
