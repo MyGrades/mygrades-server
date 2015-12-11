@@ -19,6 +19,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['logging', 'auth.basic']], 
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
 
-    //Route::post('universities/{university}/wish', ['uses' => '']);
+    Route::post('/wishes', ['uses' => 'WishController@create']);
     Route::post('/errors', ['uses' => 'ErrorController@create']);
 });
