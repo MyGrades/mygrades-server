@@ -27,8 +27,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-       // TODO: test functionality on live system and change frequency
-
         // check if there is a new error
         $schedule->call(function () {
             // get new errors
@@ -37,7 +35,7 @@ class Kernel extends ConsoleKernel
                 ->get();
             if ($new_errors !== null && count($new_errors) > 0) {
 
-                Mail::raw('Text to e-mail \n ' . json_encode($new_errors), function ($message) {
+                Mail::raw(json_encode($new_errors), function ($message) {
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New errors reported");
                 });
@@ -49,6 +47,29 @@ class Kernel extends ConsoleKernel
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
-        })->everyMinute();
+        })->daily();
+
+
+        // check if there is a new wish
+        $schedule->call(function () {
+            // get new errors
+            $new_wishes = DB::table('wishes')
+                ->whereNull('cron_seen')
+                ->get();
+            if ($new_wishes !== null && count($new_wishes) > 0) {
+
+                Mail::raw(json_encode($new_wishes), function ($message) {
+                    $message->to("hallo@mygrades.de", $name = null);
+                    $message->subject("New wishes");
+                });
+
+                echo json_encode($new_wishes);
+
+                // mark them as seen
+                DB::table('wishes')
+                    ->whereNull('cron_seen')
+                    ->update(['cron_seen' => Carbon::now()]);
+            }
+        })->daily();
     }
 }
