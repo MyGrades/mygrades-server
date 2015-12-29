@@ -1,3 +1,13 @@
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+
 a[href]:not([class]) {
     color: #FF6E40;
     text-decoration: underline;
@@ -39,13 +49,13 @@ a[href]:not([class]) {
         width: 300px;
 
         position: absolute;
-        top: 95px;
+        top: 90px;
         left: 0;
     }
 
     #teaser {
         position: absolute;
-        top: 195px;
+        top: 190px;
         font-weight: 300;
     }
 

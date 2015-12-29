@@ -21,6 +21,7 @@
         <div id="footer">
             <a href="{{ route('datenschutz') }}">Datenschutz</a>
             <a href="{{ route('impressum') }}">Impressum</a>
+            <a href="https://github.com/MyGrades/mygrades-app">Quellcode</a>
         </div>
     </div>
 @endsection
