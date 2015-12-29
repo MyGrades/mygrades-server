@@ -1,0 +1,125 @@
+a[href]:not([class]) {
+    color: #FF6E40;
+    text-decoration: underline;
+}
+
+#footer a:not(:last-child) {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/*
+ * Desktop
+ */
+@media (min-width: 700px) {
+    html#mainpage, #mainpage body {
+        height: 100%;
+        margin: 0;
+    }
+
+    #mainpage body {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    #wrapper {
+        width: 570px;
+        height: 500px;
+        /*margin: 80px;*/
+
+        position: relative;
+    }
+
+    #logo {
+        width: 300px;
+
+        position: absolute;
+        top: 95px;
+        left: 0;
+    }
+
+    #teaser {
+        position: absolute;
+        top: 195px;
+        font-weight: 300;
+    }
+
+    #teaser p {
+        font-size: 1.1em;
+    }
+
+    #playstore {
+        display: block;
+        position: absolute;
+        bottom: 100px;
+        width: 175px;
+    }
+
+    #device {
+        position: absolute;
+        right: -80px;
+        top: 0;
+
+        width: 420px;
+        height: 500px;
+
+        background-image: url("img/screen-overview-left.png");
+        background-size: cover;
+    }
+
+    #footer {
+        position: absolute;
+        bottom: 0;
+
+        font-size: 0.8em;
+    }
+}
+
+/*
+ * Mobile
+ */
+@media (max-width: 699px) {
+    #wrapper {
+        width: 300px;
+        margin: 25px auto;
+        text-align: center;
+    }
+
+    #teaser {
+        display: none;
+    }
+
+    #logo {
+        width: 55%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    #playstore {
+        display: block;
+        width: 37%;
+        float: right;
+        margin-top: 5px;
+    }
+
+    #device {
+        position: relative;
+        clear: both;
+        background-image: url("img/screen-overview-flat.png");
+        background-size: cover;
+
+        width: 350px;
+        height: 598px;
+        margin-left: -25px;
+    }
+
+    #footer {
+        margin-top: 10px;
+        font-size: 0.9em;
+    }
+}
