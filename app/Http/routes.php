@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('impressum', function () {
+    return view('impressum');
+})->name("impressum");
+
+Route::get('datenschutz', function () {
+    return view('datenschutz');
+})->name("datenschutz");
+
 Route::group(['prefix' => 'api/v1', 'middleware' => ['logging', 'auth.basic']], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
