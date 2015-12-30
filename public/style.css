@@ -49,13 +49,13 @@ a[href]:not([class]) {
         width: 300px;
 
         position: absolute;
-        top: 90px;
+        top: 75px;
         left: 0;
     }
 
     #teaser {
         position: absolute;
-        top: 190px;
+        top: 175px;
         font-weight: 300;
     }
 
@@ -66,7 +66,7 @@ a[href]:not([class]) {
     #playstore {
         display: block;
         position: absolute;
-        bottom: 100px;
+        bottom: 120px;
         width: 175px;
     }
 
