@@ -18,7 +18,7 @@
             <li>Wir kooperieren nicht mit Werbenetzwerken und wollen auch keine Werbung innerhalb der App anzeigen.</li>
         </ul>
 
-        <p><br/></p>
+        <p> <br/></p>
 
         <p><strong>Geltungsbereich</strong><br/>
         Diese Datenschutzerklärung klärt Nutzer über den Umfang und die Art der Speicherung und Verwendung personenbezogener Daten durch die App MyGrades (im Folgenden "App") (evtl. Playstore Link?) und die Website mygrades.de auf. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.<br/><br/>
@@ -40,6 +40,10 @@
 
         <p><strong>Kontaktformular</strong><br/>
         Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+
+
+        <p> </p>
+        <p>Quelle: <em><a rel="nofollow" href="http://www.e-recht24.de">http://www.e-recht24.de</a></em></p>
 
 
     </div>
