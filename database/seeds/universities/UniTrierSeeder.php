@@ -50,10 +50,10 @@ class UniTrierSeeder extends Seeder {
         $general->actions()->saveMany([
             new Action([
                 'position' => 0,
-                'type' => 'normal',
+                'type' => 'normal:form',
                 'method' => 'GET',
                 'url' => 'https://porta-system.uni-trier.de/qisserver/pages/cs/sys/portal/hisinoneStartPage.faces?chco=y',
-                'parse_expression' => '//*[@id="loginForm"]/@action'
+                'parse_expression' => '//*[@id="loginForm"]'
             ]),
             $login,
             new Action([
@@ -68,10 +68,10 @@ class UniTrierSeeder extends Seeder {
         $login->actionParams()->saveMany([
             new ActionParam(['key' => 'asdf', "type" => "username"]),
             new ActionParam(['key' => 'fdsa', "type" => "password"]),
-            //new ActionParam(['key' => "submit", "value" => "Anmelden"])
+            new ActionParam(['key' => "submit", "value" => "Anmelden"])
         ]);
 
-        $expandAll->actionParams()->saveMany([
+           $expandAll->actionParams()->saveMany([
             new ActionParam(['key' => 'examsReadonly:overviewAsTreeReadonly:tree:expandAll2', "value" => "Alle aufklappen"]),
 
         ]);
