@@ -18,6 +18,15 @@ a[href]:not([class]) {
     margin-right: 5px;
 }
 
+ul:not([class]) {
+    list-style: disc;
+}
+ul:not([class]) li {
+    list-style: disc;
+    margin-left: 15px;
+}
+
+
 /*
  * Desktop
  */
