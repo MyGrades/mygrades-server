@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rule;
 use App\University;
 use Carbon\Carbon;
 use Request;
@@ -29,7 +30,12 @@ class UniversityController extends Controller
         $updatedAtServerUnpublished = Request::header('Updated-At-Server-Unpublished');
 
         if (Input::has('published') && Input::get('published') === "true") {
-            return University::published(true)->newerThan($updatedAtServerPublished)->get();
+            $universities = University::published(true)->newerThan($updatedAtServerPublished)->with("rules")->get();
+            // hide fields which are not needed here
+            $hiddenFields = Rule::getDefaultHidden();
+            array_push($hiddenFields, "semester_format", "semester_pattern", "semester_start_summer", "semester_start_winter", "grade_factor", "overview");
+            Rule::setStaticHidden($hiddenFields);
+            return $universities;
         } else {
             // get all universities, but differentiate between published and unpublished
             $published = University::published(true)->newerThan($updatedAtServerPublished)->get();
