@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,13 +17,19 @@ class DatabaseSeeder extends Seeder
 
         $this->call(HochschulkompassSeeder::class);
 
-        $this->call(HSRMSeeder::class);
-        $this->call(TUClausthalSeeder::class);
-        $this->call(TUFreiberg::class);
-        $this->call(FHBingen::class);
-        $this->call(FernuniHagenSeeder::class);
-        $this->call(UniTrierSeeder::class);
-        $this->call(FHDarmstadt::class);
+        // call all seeders in "database/seeds/universities"
+        foreach(File::files("database/seeds/universities") as $path) {
+            $filename = pathinfo($path)["filename"];
+
+            // create and execute seeder
+            $seeder = new $filename;
+            $seeder->run();
+
+            // log
+            if (isset($this->command)) {
+                $this->command->getOutput()->writeln("<info>Seeded:</info> " . $filename);
+            }
+        }
 
         Model::reguard();
     }

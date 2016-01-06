@@ -7,7 +7,7 @@ use App\TransformerMapping;
 use App\University;
 use Illuminate\Database\Seeder;
 
-class HSRMSeeder extends Seeder {
+class UniWuerzburg extends Seeder {
     /**
      * Run the RuleSeeder.
      */
@@ -22,12 +22,12 @@ class HSRMSeeder extends Seeder {
             'overview' => true
         ]);
 
-        $hsrm = University::find(333);
-        $hsrm->published = true;
-        $hsrm->save();
+        $wuerzburg = University::find(398);
+        $wuerzburg->published = true;
+        $wuerzburg->save();
 
         // create Rule for HSRM
-        $hsrm->rules()->saveMany([
+        $wuerzburg->rules()->saveMany([
             $general
         ]);
 
@@ -36,7 +36,7 @@ class HSRMSeeder extends Seeder {
             'position' => 1,
             'type' => 'normal',
             'method' => 'POST',
-            'parse_expression' => '//*[@id="makronavigation"]/ul/li[2]/a/@href'
+            'parse_expression' => '//*[@id="makronavigation"]/ul/li[3]/a/@href'
         ]);
 
         // add actions
@@ -45,7 +45,7 @@ class HSRMSeeder extends Seeder {
                 'position' => 0,
                 'type' => 'normal',
                 'method' => 'GET',
-                'url' => 'https://qis.hs-rm.de/qisserver/rds?state=user&type=0',
+                'url' => 'https://www-sbhome1.zv.uni-wuerzburg.de/qisserver/rds?state=user&type=0',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action'
             ]),
             $login,
@@ -59,33 +59,20 @@ class HSRMSeeder extends Seeder {
                 'position' => 3,
                 'type' => 'normal',
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/a[1]/@href'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[1]/@href'
             ]),
             new Action([
                 'position' => 4,
                 'type' => 'normal',
                 'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul[1]/li/ul/li/a[1]/@href'
+                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[2]/@href'
             ]),
             new Action([
                 'position' => 5,
                 'type' => 'table_grades',
                 'method' => 'GET',
                 'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]'
-            ]),
-
-            new Action([
-                'position' => 6,
-                'type' => 'table_overview',
-                'method' => 'GET',
-                'parse_expression' => "//*[@id='wrapper']/div[6]/div[2]/form/table[2]//tr[./td[contains(text(), '###exam_id###')] and ./td[./a]]/td/a/@href"
-            ]),
-            new Action([
-                'position' => 7,
-                'type' => 'table_overview',
-                'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[3]'
-            ]),
+            ])
         ]);
 
         $login->actionParams()->saveMany([
@@ -93,6 +80,7 @@ class HSRMSeeder extends Seeder {
             new ActionParam(['key' => 'fdsa', "type" => "password"])
         ]);
 
+        $stringsToExclude = array("Fertig", "Gesamtnote", "Schlüsselqualifikationen", "Fachnote", "Studienfachnote");
 
         $general->transformerMappings()->saveMany([
             new TransformerMapping([
@@ -105,66 +93,44 @@ class HSRMSeeder extends Seeder {
             ]),
             new TransformerMapping([
                 'name' => 'semester',
-                'parse_expression' => '//td[3]'
-            ]),
-            new TransformerMapping([
-                'name' => 'grade',
-                'parse_expression' => '//td[5]'
-            ]),
-            new TransformerMapping([
-                'name' => 'state',
                 'parse_expression' => '//td[6]'
             ]),
             new TransformerMapping([
+                'name' => 'grade',
+                'parse_expression' => '//td[3]'
+            ]),
+            new TransformerMapping([
+                'name' => 'state',
+                'parse_expression' => '//td[5]'
+            ]),
+            new TransformerMapping([
                 'name' => 'credit_points',
-                'parse_expression' => '//td[7]'
+                'parse_expression' => '//td[4]'
             ]),
             new TransformerMapping([
                 'name' => 'annotation',
-                'parse_expression' => '//td[8]'
-            ]),
-            new TransformerMapping([
-                'name' => 'attempt',
                 'parse_expression' => '//td[9]'
             ]),
             new TransformerMapping([
-                'name' => 'overview_possible',
-                'parse_expression' => 'boolean(//a)'
+                'name' => 'attempt',
+                'parse_expression' => '//td[8]'
             ]),
             new TransformerMapping([
                 'name' => 'iterator',
-                'parse_expression' => "//tr[not(./td[contains(text(), 'ECTS')]) and ./td[not(starts-with(@class, 'qis_konto'))]]"
-            ]),
-
-            // Transformer overview
-            new TransformerMapping([
-                'name' => 'overview_section1',
-                'parse_expression' => "//tr[4]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_section2',
-                'parse_expression' => "//tr[5]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_section3',
-                'parse_expression' => "//tr[6]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_section4',
-                'parse_expression' => "//tr[7]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_section5',
-                'parse_expression' => "//tr[8]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_participants',
-                'parse_expression' => "//tr[9]/td[2]/text()"
-            ]),
-            new TransformerMapping([
-                'name' => 'overview_average',
-                'parse_expression' => "//tr[10]/td[2]/text()"
+                'parse_expression' => "//tr[not(" . $this->concat($stringsToExclude, "./td[contains(text(), '%s')]", " or ") . ") and ./td[not(starts-with(@class, 'qis_konto'))]]"
             ]),
         ]);
+    }
+
+    public function concat($toExclude, $placeholder, $join)
+    {
+        $temp = array();
+
+        foreach ($toExclude as $s)
+        {
+            array_push($temp, str_replace("%s", $s, $placeholder));
+        }
+
+        return implode($join, $temp);
     }
 }
