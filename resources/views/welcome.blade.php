@@ -14,7 +14,7 @@
             <p>Deine Noten und Studienfortschritt <br>aktuell und übersichtlich.</p>
         </div>
 
-        <a id="playstore" href="#"><img class="responsive-img" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/de-play-badge.png" /></a>
+        <a id="playstore" href="https://play.google.com/store/apps/details?id=de.mygrades"><img class="responsive-img" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/de-play-badge.png" /></a>
 
         <div id="device"></div>
 
