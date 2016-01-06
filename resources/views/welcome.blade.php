@@ -1,55 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+@extends('master')
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+@section('html-tag')
+    <html id="mainpage">
+@endsection
 
-    <style>
-        html {
-            height: 100%;
-        }
+@section('content')
+    <div id="wrapper">
+        <div id="logo">
+            <img src="img/logo.png" class="responsive-img" alt="MyGrades">
+        </div>
 
-        body {
-            background-color: #8BC34A;
-            height: 100%;
-        }
+        <div id="teaser">
+            <p>Deine Noten und Studienfortschritt <br>aktuell und übersichtlich.</p>
+        </div>
 
-        .mygrades-wrapper {
-            height: 100%;
-            width: 50%;
-            margin: 0 auto;
-            text-align: center;
-        }
+        <a id="playstore" href="#"><img class="responsive-img" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/de-play-badge.png" /></a>
 
-        #logo {
-            max-width: 50%;
-            display: inline-block;
-            margin: 0 auto;
-        }
+        <div id="device"></div>
 
-        #button {
-            color: #ffffff;
-            text-transform: uppercase;
-            font-size: 1.2em;
-        }
-    </style>
-</head>
-
-<body>
-<div class="valign-wrapper mygrades-wrapper">
-    <div class="valign">
-        <img id="logo" src="img/mygrades-logo.svg" class="responsive-img" alt="MyGrades">
-        <br>
-        <a href="https://play.google.com/apps/testing/de.mygrades" id="button">Werde jetzt Beta-Tester!</a>
+        <div id="footer">
+            <a href="{{ route('datenschutz') }}">Datenschutz</a>
+            <a href="{{ route('impressum') }}">Impressum</a>
+            <a href="https://github.com/MyGrades/mygrades-app">Quellcode</a>
+        </div>
     </div>
-</div>
-
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-</body>
-</html>
+@endsection
