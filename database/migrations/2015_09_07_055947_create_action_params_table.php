@@ -21,7 +21,7 @@ class CreateActionParamsTable extends Migration
             $table->integer('action_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('action_id')->references('action_id')->on('actions');
+            $table->foreign('action_id')->references('action_id')->on('actions')->onDelete('cascade');;
         });
     }
 
