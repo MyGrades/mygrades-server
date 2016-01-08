@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TUClausthalSeeder.
+ * Class GoetheUniFrankfurt.
  * Defines the rules, actions, action params and transformer mappings
  * for "Johann Wolfgang Goethe-Universität Frankfurt am Main".
  */
