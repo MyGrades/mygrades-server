@@ -5,6 +5,7 @@ use App\ActionParam;
 use App\TransformerMapping;
 use App\University;
 use App\Rule;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UniversitySeeder.
@@ -26,8 +27,33 @@ abstract class UniversitySeeder {
      */
     protected $published = false;
 
+    /**
+     * Gets called when calling the seeder with PublishUniversity command with a list of rule ids.
+     * So only rules of the university, which are in this array are updated.
+     * @var array
+     */
+    private $rules = [];
+
+    /**
+     * Sets the array of rule ids.
+     * @param array $rules
+     */
+    public function setRules($rules)
+    {
+        $this->rules = $rules;
+    }
+
     // use
     protected $university;
+
+    /**
+     * Gets the university.
+     * @return University the university.
+     */
+    public final function getUniversity()
+    {
+        return $this->university;
+    }
 
     // constants
     const RULE_SEMESTER_FORMAT_SEMESTER = "semester";
@@ -98,10 +124,21 @@ abstract class UniversitySeeder {
             'grade_factor' => $gradeFactor,
             'overview' => $overview
         ];
-        $rule = new Rule($ruleAttributes);
 
-        // add rule to university
-        $this->university->rules()->save($rule);
+        // if $rules array is not empty -> this is an update
+        if (!empty($this->rules)) {
+            $ruleId = array_shift($this->rules);
+            $rule = Rule::findOrFail($ruleId);
+            $rule->update($ruleAttributes);
+
+            // clear all actions and transformer mappings of rule
+            $this->clearRule($rule);
+        } else {
+            $rule = new Rule($ruleAttributes);
+
+            // add rule to university
+            $this->university->rules()->save($rule);
+        }
         return $rule;
     }
 
@@ -180,19 +217,26 @@ abstract class UniversitySeeder {
     }
 
     /**
-     * Gets the university.
-     * @return University the university.
-     */
-    public final function getUniversity()
-    {
-        return $this->university;
-    }
-
-    /**
      * Run the seed.
      * All logic regarding the university has to be placed inside this method.
      *
      * Gets called from the artisan seed and the PublishUniversity command.
      */
     public abstract function run();
+
+
+    /**
+     * Clears the given rule from all actions, action params and transformer mappings.
+     *
+     * @param Rule $rule
+     */
+    private function clearRule(Rule $rule)
+    {
+        // delete all actions of rule
+        // -> cascades down to actions_params
+        Action::where("rule_id", $rule->rule_id)->delete();
+
+        // delete all transformer mappings of rule
+        TransformerMapping::where("rule_id", $rule->rule_id)->delete();
+    }
 }
