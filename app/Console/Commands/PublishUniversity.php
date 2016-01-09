@@ -52,6 +52,11 @@ class PublishUniversity extends Command
         if (!$isCreateMode) {
             // show the university with all rules to the user
             $university = $seeder->getUniversity();
+            if ($university->rules->count() < 1) {
+                $this->error("Oooops. Seems like there isn't a rule for this university. Try again with -create!");
+                return;
+            }
+
             $this->line("Rules of: " . $university->name . ", ID=" . $university->university_id);
             $this->table(array_keys($university->rules->toArray()[0]), $university->rules->toArray());
 
