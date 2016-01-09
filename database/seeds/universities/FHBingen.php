@@ -1,12 +1,9 @@
 <?php
 
-use App\Action;
-use App\ActionParam;
-use App\Rule;
-use App\TransformerMapping;
-use App\University;
-use Illuminate\Database\Seeder;
-
+/**
+ * Class FHBingen.
+ * Defines the rules, actions, action params and transformer mappings for "Fachhochschule Bingen".
+ */
 class FHBingen extends UniversitySeeder {
 
     protected $universityId = 65;
