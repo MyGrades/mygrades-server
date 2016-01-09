@@ -1,125 +1,43 @@
 <?php
 
-use App\Action;
-use App\ActionParam;
-use App\Rule;
-use App\TransformerMapping;
-use App\University;
-use Illuminate\Database\Seeder;
+/**
+ * Class UniWuerzburg.
+ * Defines the rules, actions, action params and transformer mappings
+ * for "Julius-Maximilians-Universität Würzburg".
+ */
+class UniWuerzburg extends UniversitySeeder {
 
-class UniWuerzburg extends Seeder {
-    /**
-     * Run the RuleSeeder.
-     */
+    protected $universityId = 398;
+    protected $published = true;
+
     public function run()
     {
-        // create Rule bachelor
-        $general = new Rule([
-            'name' => 'Allgemein',
-            'semester_format' => 'semester',
-            'semester_pattern' => '(^\w+)\s*([0-9]+)',
-            'grade_factor' => 1,
-            'overview' => true
-        ]);
+        // create rule
+        $rule = $this->createRule("Allgemein", UniversitySeeder::RULE_SEMESTER_FORMAT_SEMESTER, '(^\w+)\s*([0-9]+)');
 
-        $wuerzburg = University::find(398);
-        $wuerzburg->published = true;
-        $wuerzburg->save();
+        // create actions for rule
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action', $url='https://www-sbhome1.zv.uni-wuerzburg.de/qisserver/rds?state=user&type=0');
+        $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="makronavigation"]/ul/li[3]/a/@href');
+        $this->createActionParam($login, "asdf", UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
+        $this->createActionParam($login, "fdsa", UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
-        // create Rule for HSRM
-        $wuerzburg->rules()->saveMany([
-            $general
-        ]);
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[1]/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[2]/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]');
 
-
-        $login = new Action([
-            'position' => 1,
-            'type' => 'normal',
-            'method' => 'POST',
-            'parse_expression' => '//*[@id="makronavigation"]/ul/li[3]/a/@href'
-        ]);
-
-        // add actions
-        $general->actions()->saveMany([
-            new Action([
-                'position' => 0,
-                'type' => 'normal',
-                'method' => 'GET',
-                'url' => 'https://www-sbhome1.zv.uni-wuerzburg.de/qisserver/rds?state=user&type=0',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/div/form/@action'
-            ]),
-            $login,
-            new Action([
-                'position' => 2,
-                'type' => 'normal',
-                'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/div/form/div/ul/li[4]/a/@href'
-            ]),
-            new Action([
-                'position' => 3,
-                'type' => 'normal',
-                'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[1]/@href'
-            ]),
-            new Action([
-                'position' => 4,
-                'type' => 'normal',
-                'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/ul/li[last()]/a[2]/@href'
-            ]),
-            new Action([
-                'position' => 5,
-                'type' => 'table_grades',
-                'method' => 'GET',
-                'parse_expression' => '//*[@id="wrapper"]/div[6]/div[2]/form/table[2]'
-            ])
-        ]);
-
-        $login->actionParams()->saveMany([
-            new ActionParam(['key' => 'asdf', "type" => "username"]),
-            new ActionParam(['key' => 'fdsa', "type" => "password"])
-        ]);
+        // create transformer mappings
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_EXAM_ID, '//td[1]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_NAME, '//td[2]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_SEMESTER, '//td[6]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_GRADE, '//td[3]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_STATE, '//td[5]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_CREDIT_POINTS, '//td[4]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ANNOTATION, '//td[9]');
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ATTEMPT, '//td[8]');
 
         $stringsToExclude = array("Fertig", "Gesamtnote", "Schlüsselqualifikationen", "Fachnote", "Studienfachnote");
-
-        $general->transformerMappings()->saveMany([
-            new TransformerMapping([
-                'name' => 'exam_id',
-                'parse_expression' => '//td[1]'
-            ]),
-            new TransformerMapping([
-                'name' => 'name',
-                'parse_expression' => '//td[2]'
-            ]),
-            new TransformerMapping([
-                'name' => 'semester',
-                'parse_expression' => '//td[6]'
-            ]),
-            new TransformerMapping([
-                'name' => 'grade',
-                'parse_expression' => '//td[3]'
-            ]),
-            new TransformerMapping([
-                'name' => 'state',
-                'parse_expression' => '//td[5]'
-            ]),
-            new TransformerMapping([
-                'name' => 'credit_points',
-                'parse_expression' => '//td[4]'
-            ]),
-            new TransformerMapping([
-                'name' => 'annotation',
-                'parse_expression' => '//td[9]'
-            ]),
-            new TransformerMapping([
-                'name' => 'attempt',
-                'parse_expression' => '//td[8]'
-            ]),
-            new TransformerMapping([
-                'name' => 'iterator',
-                'parse_expression' => "//tr[not(" . $this->concat($stringsToExclude, "./td[contains(text(), '%s')]", " or ") . ") and ./td[not(starts-with(@class, 'qis_konto'))]]"
-            ]),
-        ]);
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ITERATOR, '//tr[not(' . $this->concat($stringsToExclude, "./td[contains(text(), '%s')]", " or ") . ') and ./td[not(starts-with(@class, "qis_konto"))] and count(./td) = 9]');
     }
 
     public function concat($toExclude, $placeholder, $join)
