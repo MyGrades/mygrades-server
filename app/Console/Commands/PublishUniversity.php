@@ -14,7 +14,8 @@ class PublishUniversity extends Command
      * @var string
      */
     protected $signature = 'university:publish
-                        {class : name of the class and file of the university}';
+                        {class : name of the class and file of the university}
+                        {--c|create}';
 
     /**
      * The console command description.
@@ -25,8 +26,6 @@ class PublishUniversity extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -42,15 +41,49 @@ class PublishUniversity extends Command
     {
         Model::unguard();
 
+        // retrieve command input
         $universityClass = $this->argument('class');
+        $isCreateMode = $this->option('create');
 
-        // create and execute seeder
+        // create seeder object
         $seeder = new $universityClass;
-        //$this->clearUniversity($seeder->getUniversity());
+
+        // if command gets called in update mode (without action "create") -> prompt for rule ids
+        if (!$isCreateMode) {
+            // show the university with all rules to the user
+            $university = $seeder->getUniversity();
+            $this->line("Rules of: " . $university->name . ", ID=" . $university->university_id);
+            $this->table(array_keys($university->rules->toArray()[0]), $university->rules->toArray());
+
+            $rules = [];
+            // prompt for rule ids of university
+            do {
+                $rule_id = $this->ask('Enter the rule id of ' . $universityClass . ". \nIf there are multiple: Enter one by one in order of appearance in seeder. \nTo finish enter '-1'.");
+                $rule_id = intval($rule_id);
+                if ($rule_id !== -1) {
+                    $rules[] = $rule_id;
+                }
+            } while ($rule_id !== -1);
+
+            // check if at least 1 rule id was retrieved
+            if (empty($rules)) {
+                $this->error("What's wrong with you? You have to add at least 1 valid rule id! Try again!");
+                return;
+            }
+
+            $seeder->setRules($rules);
+        }
+
+        // run the seeder
         $seeder->run();
 
         // log
-        $this->line("<info>Published:</info> " . $universityClass);
+        if ($isCreateMode) {
+            $infoString = "Created";
+        } else {
+            $infoString = "Updated";
+        }
+        $this->line("<info>$infoString:</info> " . $universityClass);
 
         Model::reguard();
     }
