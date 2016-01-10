@@ -23,11 +23,13 @@ class DatabaseSeeder extends Seeder
 
             // create and execute seeder
             $seeder = new $filename;
-            $seeder->run();
+            if ($seeder instanceof UniversitySeeder) {
+                $seeder->run();
 
-            // log
-            if (isset($this->command)) {
-                $this->command->getOutput()->writeln("<info>Seeded:</info> " . $filename);
+                // log
+                if (isset($this->command)) {
+                    $this->command->getOutput()->writeln("<info>Published:</info> " . $filename);
+                }
             }
         }
 

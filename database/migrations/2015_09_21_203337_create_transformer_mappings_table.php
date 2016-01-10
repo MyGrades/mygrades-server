@@ -16,10 +16,11 @@ class CreateTransformerMappingsTable extends Migration
             $table->increments('transformer_mapping_id');
             $table->string('name');
             $table->text('parse_expression');
+
             $table->integer('rule_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('rule_id')->references('rule_id')->on('rules');
+            $table->foreign('rule_id')->references('rule_id')->on('rules')->onDelete('cascade');
         });
     }
 
