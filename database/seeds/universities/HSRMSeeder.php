@@ -39,7 +39,7 @@ class HSRMSeeder extends UniversitySeeder {
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ANNOTATION, '//td[8]');
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ATTEMPT, '//td[9]');
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_OVERVIEW_POSSIBLE, 'boolean(//a)');
-        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ITERATOR, "//tr[not(./td[contains(text(), 'ECTS')]) and ./td[not(starts-with(@class, 'qis_konto'))] and count(./td) = 9]");
+        $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ITERATOR, "//tr[not(./td[contains(text(), 'ECTS')] or ./td[contains(text(), 'Kontostand')]) and ./td[not(starts-with(@class, 'qis_konto'))] and count(./td) = 9]");
 
         // transformer overview
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_OVERVIEW_SECTION_1, '//tr[4]/td[2]/text()');
