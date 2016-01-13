@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class HSRMSeeder.
+ * Class FHFrankfurt.
  * Defines the rules, actions, action params and transformer mappings for
- * "Hochschule RheinMain, Wiesbaden"
+ * "Frankfurt University of Applied Sciences"
  */
 class FHFrankfurt extends UniversitySeeder {
 
