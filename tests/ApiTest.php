@@ -1,5 +1,6 @@
 <?php
 
+use App\Rule;
 use App\University;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -37,6 +38,9 @@ class ApiTest extends TestCase
         // get all published universities
         $response = $this->call('GET', $this->apiPrefix . '/universities?published=true');
 
+        $hiddenFields = Rule::getDefaultHidden();
+        Rule::setStaticHidden($hiddenFields);
+
         $universities = $this->parseJson($response);
         foreach($universities as $university)
         {
@@ -65,7 +69,7 @@ class ApiTest extends TestCase
         $this->assertGreaterThan(0, count($university->rules));
         foreach ($university->rules as $rule)
         {
-            var_dump($rule);
+            //var_dump($rule);
             // set booleans for action params username and password
             $usernameIsPresent = false;
             $passwordIsPresent = false;
