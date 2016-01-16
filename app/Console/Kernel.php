@@ -28,6 +28,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
+        /*
+         * Let us know if there is something new :)
+         */
         // check if there is a new error
         $schedule->call(function () {
             // get new errors
@@ -41,15 +45,12 @@ class Kernel extends ConsoleKernel
                     $message->subject("New errors reported");
                 });
 
-                echo json_encode($new_errors);
-
                 // mark them as seen
                 DB::table('errors')
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
         })->daily();
-
 
         // check if there is a new wish
         $schedule->call(function () {
@@ -63,8 +64,6 @@ class Kernel extends ConsoleKernel
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New wishes");
                 });
-
-                echo json_encode($new_wishes);
 
                 // mark them as seen
                 DB::table('wishes')

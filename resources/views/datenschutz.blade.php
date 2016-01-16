@@ -14,14 +14,14 @@
             <li>Die Noten und sonstige Inhalte deines Notensystems werden lokal verarbeitet und gespeichert.</li>
             <li>Wir erhalten und speichern über deine Daten oder deine Nutzung keinerlei Informationen, bis auf solche, die ohnehin beim Surfen gesendet werden.</li>
             <li>Jegliche Kommunikation via Internet läuft über eine SSL-gesicherte Verbindung.</li>
-            <li>Der Quellcode der App ist auf GitHub verfügbar.</li>
+            <li>Der Quellcode der App ist auf <a href="https://github.com/MyGrades">GitHub</a> verfügbar.</li>
             <li>Wir kooperieren nicht mit Werbenetzwerken und wollen auch keine Werbung innerhalb der App anzeigen.</li>
         </ul>
 
         <p> <br/></p>
 
         <p><strong>Geltungsbereich</strong><br/>
-        Diese Datenschutzerklärung klärt Nutzer über den Umfang und die Art der Speicherung und Verwendung personenbezogener Daten durch die App MyGrades (im Folgenden "App") (evtl. Playstore Link?) und die Website mygrades.de auf. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.<br/><br/>
+        Diese Datenschutzerklärung klärt Nutzer über den Umfang und die Art der Speicherung und Verwendung personenbezogener Daten durch die App <a href="https://play.google.com/store/apps/details?id=de.mygrades">MyGrades</a> (im Folgenden "App") und die Website mygrades.de auf. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.<br/><br/>
         Die Nutzung unserer Webseite und App ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten oder der App personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.<br/><br/>
         Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
         </p>
