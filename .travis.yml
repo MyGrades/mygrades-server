@@ -11,8 +11,14 @@ php:
 
 before_script:
   - mysql -e 'create database homestead_test;'
+  # fix ipv6 issue that prevented composer requests and resulted in failing builds
+  - sudo sh -c "echo 'precedence ::ffff:0:0/96  100' >> /etc/gai.conf"
+  # updates composer on travis
+  - travis_retry composer self-update
+  # clear composer cache, might speed up finding new tags
+  - travis_retry composer clear-cache
   # set the global github token, so connections won't be cancelled
-  - composer config -g github-oauth.github.com GITHUB_TOKEN
+  - composer config -g github-oauth.github.com $GITHUB_TOKEN
   - composer install --prefer-source --no-interaction
   - php artisan migrate:install
   - php artisan migrate:refresh --seed
