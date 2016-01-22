@@ -11,6 +11,8 @@ php:
 
 before_script:
   - mysql -e 'create database homestead_test;'
+  # set the global github token, so connections won't be cancelled
+  - composer config -g github-oauth.github.com $GITHUB_TOKEN
   - composer install --prefer-source --no-interaction
   - php artisan migrate:install
   - php artisan migrate:refresh --seed
