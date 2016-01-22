@@ -11,7 +11,7 @@ php:
 
 before_script:
   - mysql -e 'create database homestead_test;'
-  - composer install
+  - composer install --prefer-source --no-interaction
   - php artisan migrate:install
   - php artisan migrate:refresh --seed
 
