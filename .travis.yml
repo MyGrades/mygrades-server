@@ -1,10 +1,17 @@
 language: php
+
+sudo: false
+
+cache:
+  directories:
+        - $HOME/.composer/cache
+
 php:
   - 5.6
 
 before_script:
   - mysql -e 'create database homestead_test;'
-  - composer install --no-interaction
+  - composer install
   - php artisan migrate:install
   - php artisan migrate:refresh --seed
 
