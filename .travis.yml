@@ -1,11 +1,12 @@
 language: php
 php:
   - 5.6
-  - hhvm
 
 before_script:
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - mysql -e 'create database homestead_test;'
+  - composer install --no-interaction
+  - php artisan migrate:install
+  - php artisan migrate:refresh --seed
 
 script: phpunit
 
