@@ -1,10 +1,6 @@
 language: php
 
-sudo: false
-
-cache:
-  directories:
-        - $HOME/.composer/cache
+sudo: true
 
 php:
   - 5.6
