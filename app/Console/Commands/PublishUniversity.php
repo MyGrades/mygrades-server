@@ -53,7 +53,7 @@ class PublishUniversity extends Command
             // show the university with all rules to the user
             $university = $seeder->getUniversity();
             if ($university->rules->count() < 1) {
-                $this->error("Oooops. Seems like there isn't a rule for this university. Try again with -create!");
+                $this->error("Oooops. Seems like there isn't a rule for this university. Try again with --create!");
                 return;
             }
 
