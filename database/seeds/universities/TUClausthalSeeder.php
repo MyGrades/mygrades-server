@@ -15,7 +15,7 @@ class TUClausthalSeeder extends UniversitySeeder {
         $rule = $this->createRule("Allgemein", UniversitySeeder::RULE_SEMESTER_FORMAT_DATE, '\d{2}\.(\d{2})\.(\d{4})', $overview=false, $semesterStartSummer=4, $semesterStartWinter=10, $gradeFactor=0.01);
 
         // create actions for rule
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/div[2]/form/@action', $url="https://www.studierenplus.tu-clausthal.de/service/online-pruefungsanmeldung/login/");
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/div[2]/div/table/tbody/tr/td[1]/form/@action', $url="https://qisweb.hispro.de/tuc/rds?state=user&type=0");
         $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="navbox"]/dl/dd[2]/a/@href');
         $this->createActionParam($login, "asdf", $type=UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "fdsa", $type=UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
