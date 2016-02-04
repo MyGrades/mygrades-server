@@ -15,13 +15,13 @@ class TUClausthalSeeder extends UniversitySeeder {
         $rule = $this->createRule("Allgemein", UniversitySeeder::RULE_SEMESTER_FORMAT_DATE, '\d{2}\.(\d{2})\.(\d{4})', $overview=false, $semesterStartSummer=4, $semesterStartWinter=10, $gradeFactor=0.01);
 
         // create actions for rule
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/div[2]/div/table/tbody/tr/td[1]/form/@action', $url="https://qisweb.hispro.de/tuc/rds?state=user&type=0");
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//form[@name="loginform"]/@action', $url="https://qisweb.hispro.de/tuc/rds?state=user&type=0");
         $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="navbox"]/dl/dd[2]/a/@href');
         $this->createActionParam($login, "asdf", $type=UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "fdsa", $type=UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/div[3]/form/div/ul/li[3]/a/@href');
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/form/ul/li/a[1]/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]//div[@class="mikronavi_list"]/ul/li[3]/a/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]//ul[@class="treelist"]/li/a[1]/@href');
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//*[@id="inhalt"]/form/table[2]');
 
         // create transformer mappings
