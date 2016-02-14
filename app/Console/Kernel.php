@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
             if ($new_errors !== null && count($new_errors) > 0) {
 
                 Mail::raw(json_encode($new_errors), function ($message) {
+                    $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New errors reported");
                 });
@@ -61,6 +62,7 @@ class Kernel extends ConsoleKernel
             if ($new_wishes !== null && count($new_wishes) > 0) {
 
                 Mail::raw(json_encode($new_wishes), function ($message) {
+                    $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New wishes");
                 });
