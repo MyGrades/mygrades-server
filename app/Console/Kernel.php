@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
-        })->daily();
+        })->hourly();
 
         // check if there is a new wish
         $schedule->call(function () {
@@ -70,6 +70,6 @@ class Kernel extends ConsoleKernel
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
-        })->daily();
+        })->hourly();
     }
 }
