@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Error;
+use App\Wish;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -35,12 +37,10 @@ class Kernel extends ConsoleKernel
         // check if there is a new error
         $schedule->call(function () {
             // get new errors
-            $new_errors = DB::table('errors')
-                ->whereNull('cron_seen')
-                ->get();
-            if ($new_errors !== null && count($new_errors) > 0) {
+            $new_errors = Error::cronUnseen()->get();
 
-                Mail::raw(json_encode($new_errors), function ($message) {
+            if (!$new_errors->isEmpty()) {
+                Mail::send('emails.errors', ['errors' => $new_errors], function ($message) {
                     $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New errors reported");
@@ -56,12 +56,11 @@ class Kernel extends ConsoleKernel
         // check if there is a new wish
         $schedule->call(function () {
             // get new errors
-            $new_wishes = DB::table('wishes')
-                ->whereNull('cron_seen')
-                ->get();
-            if ($new_wishes !== null && count($new_wishes) > 0) {
+            $new_wishes = Wish::cronUnseen()->get();
 
-                Mail::raw(json_encode($new_wishes), function ($message) {
+            if (!$new_wishes->isEmpty()) {
+
+                Mail::send('emails.wishes', ['wishes' => $new_wishes], function ($message) {
                     $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New wishes");
