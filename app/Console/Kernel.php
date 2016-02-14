@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
             if ($new_errors !== null && count($new_errors) > 0) {
 
                 Mail::raw(json_encode($new_errors), function ($message) {
+                    $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New errors reported");
                 });
@@ -50,7 +51,7 @@ class Kernel extends ConsoleKernel
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
-        })->daily();
+        })->hourly();
 
         // check if there is a new wish
         $schedule->call(function () {
@@ -61,6 +62,7 @@ class Kernel extends ConsoleKernel
             if ($new_wishes !== null && count($new_wishes) > 0) {
 
                 Mail::raw(json_encode($new_wishes), function ($message) {
+                    $message->from('notification@mygrades.de', 'Notification | MyGrades');
                     $message->to("hallo@mygrades.de", $name = null);
                     $message->subject("New wishes");
                 });
@@ -70,6 +72,6 @@ class Kernel extends ConsoleKernel
                     ->whereNull('cron_seen')
                     ->update(['cron_seen' => Carbon::now()]);
             }
-        })->daily();
+        })->hourly();
     }
 }
