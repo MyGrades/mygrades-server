@@ -1,4 +1,5 @@
 # MyGrades server
+master: [![Travis CI master](https://img.shields.io/travis/MyGrades/mygrades-server/master.svg?style=flat-square)](https://travis-ci.org/MyGrades/mygrades-server/builds)&nbsp;&nbsp;&nbsp; develop: [![Travis CI develop](https://img.shields.io/travis/MyGrades/mygrades-server/develop.svg?style=flat-square)](https://travis-ci.org/MyGrades/mygrades-server/builds)
 
 MyGrades server is used as the backend for the Android app [MyGrades](https://github.com/MyGrades/mygrades-app). It is written in PHP using the Laravel framework.
 
