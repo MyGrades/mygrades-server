@@ -20,7 +20,19 @@ class Error extends Model
      */
     protected $primaryKey = "error_id";
 
+    public $timestamps = false;
+
     protected $dates = ['created_at', 'cron_seen'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'written' => 'boolean',
+        'fixed' => 'boolean'
+    ];
 
     /**
      * Scope to get the unseen errors.

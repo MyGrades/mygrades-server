@@ -20,8 +20,19 @@ class Wish extends Model
      */
     protected $primaryKey = "wish_id";
 
+    public $timestamps = false;
 
     protected $dates = ['created_at', 'cron_seen'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'written' => 'boolean',
+        'done' => 'boolean'
+    ];
 
     /**
      * Scope to get the unseen wishes.

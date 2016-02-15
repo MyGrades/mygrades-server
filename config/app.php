@@ -203,4 +203,7 @@ return [
 
     "api_user" => env('API_USER', ""),
     "api_password" => env('API_PASSWORD', ""),
+
+    "admin_user" => env('ADMIN_USER', ""),
+    "admin_password" => env('ADMIN_PASSWORD', ""),
 ];
