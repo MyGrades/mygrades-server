@@ -23,6 +23,14 @@ Route::get('datenschutz', function () {
     return view('datenschutz');
 })->name("datenschutz");
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.adminbasic']],  function () {
+    Route::get('wishes', 'WishController@indexAdmin')->name("adminWishes");
+    Route::post('wishes/update', 'WishController@updateAdmin')->name('adminWishesUpdate');
+
+    Route::get('errors', 'ErrorController@indexAdmin')->name("adminErrors");
+    Route::post('errors/update', 'ErrorController@updateAdmin')->name('adminErrorsUpdate');
+});
+
 Route::group(['prefix' => 'api/v1', 'middleware' => ['logging', 'auth.basic']], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);

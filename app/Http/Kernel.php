@@ -22,6 +22,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth.basic' => Middleware\BasicAuthMiddleware::class,
-        'logging' => Middleware\LoggingMiddleware::class
+        'logging' => Middleware\LoggingMiddleware::class,
+        'auth.adminbasic' => Middleware\AdminBasicAuthMiddleware::class
     ];
 }
