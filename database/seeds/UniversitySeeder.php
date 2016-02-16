@@ -239,4 +239,25 @@ abstract class UniversitySeeder {
         // delete all transformer mappings of rule
         TransformerMapping::where("rule_id", $rule->rule_id)->delete();
     }
+
+    /**
+     * Iterates over a string array, places each string into a given placeholder string at '%s'
+     * and concatenates the resulting strings with a given delimiter.
+     *
+     * @param $stringArray
+     * @param $placeholder
+     * @param $delimiter
+     * @return string
+     */
+    protected final function concatStringArray($stringArray, $placeholder, $delimiter)
+    {
+        $temp = array();
+
+        foreach ($stringArray as $s)
+        {
+            array_push($temp, str_replace("%s", $s, $placeholder));
+        }
+
+        return implode($delimiter, $temp);
+    }
 }
