@@ -35,7 +35,7 @@ class GoetheUniFrankfurt extends UniversitySeeder {
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ATTEMPT, '//td[9]');
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_EXAM_DATE, '//td[10]');
 
-        $stringsToExclude = array("Durchschnittsnote", "Deans-Liste-Note");
+        $stringsToExclude = array("Durchschnittsnote", "Deans-List-Note");
         $this->createTransformerMapping($rule, UniversitySeeder::TRANSFORMER_MAPPING_ITERATOR, '//tr[not(' . $this->concatStringArray($stringsToExclude, "./td[contains(text(), '%s')]", " or ") . ') and ./td[starts-with(@class, "qis_records")] and count(./td) = 10]');
     }
 }
