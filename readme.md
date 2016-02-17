@@ -10,6 +10,14 @@ Its two main purposes are:
 
 It is important to note, that the server does not receive or store any information about the user such as the username or password, nor his or her grades. These will be used solely on the client.
 
+## Used third-party libraries
+* [Laravel](https://github.com/laravel/laravel)
+* [Laravel IDE Helper](https://github.com/barryvdh/laravel-ide-helper)
+* [CSV Seeder](https://github.com/Flynsarmy/laravel-csv-seeder)
+* [PHP Unit](https://github.com/sebastianbergmann/phpunit)
+* [Responsive Email Template](https://github.com/leemunroe/responsive-html-email-template)
+* [Composer](https://github.com/composer/composer)
+
 ## License
 
 This project is licensed under the [Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
