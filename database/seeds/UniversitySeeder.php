@@ -56,8 +56,9 @@ abstract class UniversitySeeder {
     }
 
     // constants
-    const RULE_SEMESTER_FORMAT_SEMESTER = "semester";
-    const RULE_SEMESTER_FORMAT_DATE = "date";
+    const RULE_SEMESTER_FORMAT_SEMESTER = "semester"; // e.q. WS 2015
+    const RULE_SEMESTER_FORMAT_SEMESTER_REVERSED = "semester_reversed"; // e.g. 2015WS
+    const RULE_SEMESTER_FORMAT_DATE = "date"; // e.q. 27.07.2015
 
     const HTTP_GET = "GET";
     const HTTP_POST = "POST";
