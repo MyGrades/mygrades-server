@@ -20,7 +20,7 @@ class FHWuerzburgSchweinfurt extends UniversitySeeder {
         $this->createActionParam($login, "username", $type=UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "password", $type=UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//div[@class="tile"]');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//div[@class="tile" and //div[contains(@class, "panel-group")]]');
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_OVERVIEW, UniversitySeeder::HTTP_GET, '//div[contains(@class, "panel-default")]//a[@data-exam="###'.UniversitySeeder::TRANSFORMER_MAPPING_EXAM_ID.'###"]/../../..//div[contains(@class, "panel-body")]');
 
         // create transformer mappings
