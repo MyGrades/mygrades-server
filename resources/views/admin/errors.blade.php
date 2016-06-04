@@ -13,10 +13,13 @@
                 <thead>
                     <th>Error ID</th>
                     <th>University</th>
+                    <th>Rule ID</th>
                     <th>Name</th>
                     <th>Message</th>
                     <th>Email</th>
                     <th>App Version</th>
+                    <th>Gerät</th>
+                    <th>Android Version</th>
                     <th>Time</th>
                     <th>Written</th>
                     <th>Fixed</th>
@@ -27,10 +30,13 @@
                     <tr>
                         <td>{{ $error->error_id }}</td>
                         <td>{{ $error->university_id }}: {{ $error->university->name }}</td>
+                        <td>{{ $error->rule_id }}</td>
                         <td>{{ $error->name }}</td>
                         <td>{{ $error->message }}</td>
                         <td>{{ $error->email }}</td>
                         <td>{{ $error->app_version }}</td>
+                        <td>{{ $error->device }}</td>
+                        <td>{{ $error->android_version }}</td>
                         <td>{{ $error->created_at->format('d.m.Y H:i') }} Uhr</td>
                         <td>
                             <p style="text-align: center">

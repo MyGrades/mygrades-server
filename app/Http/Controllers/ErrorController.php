@@ -28,7 +28,10 @@ class ErrorController extends Controller
             'message' => Input::get("message"),
             'email' => Input::get("email"),
             'app_version' => Input::get("app_version"),
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'rule_id' => Input::get("rule_id"),
+            'device' => Input::get("device"),
+            'android_version' => Input::get("android_version")
         ]);
 
         return response(null, 200);
