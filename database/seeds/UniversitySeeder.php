@@ -56,6 +56,7 @@ abstract class UniversitySeeder {
     }
 
     // constants
+    const RULE_TYPE_MULTIPLE_TABLES = "multiple_tables";
     const RULE_SEMESTER_FORMAT_SEMESTER = "semester"; // e.q. WS 2015
     const RULE_SEMESTER_FORMAT_SEMESTER_REVERSED = "semester_reversed"; // e.g. 2015WS
     const RULE_SEMESTER_FORMAT_DATE = "date"; // e.q. 27.07.2015
@@ -111,9 +112,10 @@ abstract class UniversitySeeder {
      * @param string $semesterStartSummer
      * @param string $semesterStartWinter
      * @param double $gradeFactor
+     * @param string $type
      * @return Rule
      */
-    protected final function createRule($name, $semesterFormat, $semesterPattern, $overview=false, $semesterStartSummer=NULL, $semesterStartWinter=NULL,$gradeFactor=1.0)
+    protected final function createRule($name, $semesterFormat, $semesterPattern, $overview=false, $semesterStartSummer=NULL, $semesterStartWinter=NULL,$gradeFactor=1.0, $type=NULL)
     {
         // fill array for rule creation
         $ruleAttributes = [
@@ -123,7 +125,8 @@ abstract class UniversitySeeder {
             'semester_start_summer' => $semesterStartSummer,
             'semester_start_winter' => $semesterStartWinter,
             'grade_factor' => $gradeFactor,
-            'overview' => $overview
+            'overview' => $overview,
+            'type' => $type
         ];
 
         // if $rules array is not empty -> this is an update
