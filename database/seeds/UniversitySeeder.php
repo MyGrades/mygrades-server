@@ -66,6 +66,7 @@ abstract class UniversitySeeder {
     const ACTION_TYPE_NORMAL = "normal";
     const ACTION_TYPE_TABLE_GRADES = "table_grades";
     const ACTION_TYPE_TABLE_OVERVIEW = "table_overview";
+    const ACTION_TYPE_TABLE_GRADES_ITERATOR = "table_grades_iterator";
 
     const ACTION_PARAM_TYPE_USERNAME = "username";
     const ACTION_PARAM_TYPE_PASSWORD = "password";
@@ -89,6 +90,10 @@ abstract class UniversitySeeder {
     const TRANSFORMER_MAPPING_OVERVIEW_SECTION_5 = "overview_section5";
     const TRANSFORMER_MAPPING_OVERVIEW_AVERAGE = "overview_average";
     const TRANSFORMER_MAPPING_PARTICIPANTS = "overview_participants";
+    
+    const MT_SEMESTER_OPTIONS = "mt_semester_options";
+    const MT_FORM_URL = "mt_form_url";
+    const MT_SEMESTER_STRING = "mt_semester_string";
 
     /**
      * UniversitySeeder constructor.
