@@ -10,6 +10,27 @@ Its two main purposes are:
 
 It is important to note, that the server does not receive or store any information about the user such as the username or password, nor his or her grades. These will be used solely on the client.
 
+## Installation
+
+Install the server in your `/var/www/html` directory and point your [app](https://github.com/MyGrades/mygrades-app) to the server url.
+
+```bash
+git clone https://github.com/MyGrades/mygrades-server.git
+cd mygrades-server
+cp .env.example .env # edit to your needs (only DB_* needed)
+
+chown www-data:www-data storage bootstrap/cache
+chmod ug+rwx storage bootstrap/cache
+
+composer install
+composer update
+composer dump-autoload
+
+php artisan migrate:install
+php artistan migrate:refresh --seed
+```
+
+
 ## Used third-party libraries
 * [Laravel](https://github.com/laravel/laravel)
 * [Laravel IDE Helper](https://github.com/barryvdh/laravel-ide-helper)
