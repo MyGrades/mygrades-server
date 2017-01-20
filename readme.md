@@ -27,7 +27,7 @@ composer update
 composer dump-autoload
 
 php artisan migrate:install
-php artistan migrate:refresh --seed
+php artisan migrate:refresh --seed
 ```
 
 
