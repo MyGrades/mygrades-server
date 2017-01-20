@@ -23,7 +23,7 @@ class FHKiel extends UniversitySeeder {
         $this->createActionParam($login, "password", $type=UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
         // Open exam administration & parse URL to exams extract
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//div[@class = 'mikronavi_list']//li[5]/a/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//div[@class = "mikronavi_list"]//li[5]/a/@href');
 
         // Select degree & parse URL to actual exams extract
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//form/ul/li/a[3]/@href');
