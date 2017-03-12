@@ -16,11 +16,11 @@ class TUCottbus extends UniversitySeeder {
         $rule = $this->createRule("Allgemein", UniversitySeeder::RULE_SEMESTER_FORMAT_SEMESTER, '(^\w+)\s*([0-9]+)', $overview=true);
 
         // create actions for rule
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, "//*[@id='wrapper']//a[contains(@href, 'state=wlogin')]/@href",  $url="https://www.zv.tu-cottbus.de/");
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//form[@name="loginform"]/@action');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, "//div[@class='containerLogin']/a/@href",  $url="https://www.zv.tu-cottbus.de/qispos11/rds?state=user&type=0");
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL.":form", UniversitySeeder::HTTP_GET, '//*[@id="login"]/form/@action');
         $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="makronavigation"]/ul/li[2]/a/@href');
-        $this->createActionParam($login, "asdf", UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
-        $this->createActionParam($login, "fdsa", UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
+        $this->createActionParam($login, "username", UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
+        $this->createActionParam($login, "password", UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//div[@class="mikronavi_list"]/ul/li[3]/a/@href');
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, "//ul[@class='treelist']/li/a[2]/@href");
