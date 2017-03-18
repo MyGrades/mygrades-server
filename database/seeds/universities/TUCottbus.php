@@ -17,7 +17,7 @@ class TUCottbus extends UniversitySeeder {
 
         // create actions for rule
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, "//div[@class='containerLogin']/a/@href",  $url="https://www.zv.tu-cottbus.de/qispos11/rds?state=user&type=0");
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL.":form", UniversitySeeder::HTTP_GET, '//*[@id="login"]/form/@action');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL.":form", UniversitySeeder::HTTP_GET, '//*[@id="login"]/form');
         $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="makronavigation"]/ul/li[2]/a/@href');
         $this->createActionParam($login, "username", UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "password", UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
