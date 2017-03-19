@@ -8,7 +8,7 @@
 class UniMainz extends UniversitySeeder {
 
     protected $universityId = 262;
-    protected $published = true;
+    protected $published = false;
 
     public function run()
     {
