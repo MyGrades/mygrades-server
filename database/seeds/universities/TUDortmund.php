@@ -21,8 +21,8 @@ class TUDortmund extends UniversitySeeder {
         $this->createActionParam($login, "username", UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "password", UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
 
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//div[@class="content"]//div[@class="menublock"]//ul/li[3]/a/@href');
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//ul[@class="treelist"]/li/a[3]/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//div[@class="mikronavi_list"]//ul/li[3]/a/@href');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//ul[@class="treelist"]/li/a[3]/@href');
 
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//div[@class="content"]/form/table[2]');
 
