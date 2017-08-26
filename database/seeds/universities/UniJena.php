@@ -23,6 +23,7 @@ class UniJena extends UniversitySeeder {
 
         $acceptForm = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="wrapper"]//form/@action');
         $this->createActionParam($acceptForm, "checkbox", $type=null, $value="y");
+        $this->createActionParam($acceptForm, "cont", $type=null, $value="Weiter");
 
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//ul[@class="treelist"]/li/a[2]/@href');
         $this->createAction($rule, UniversitySeeder::ACTION_TYPE_TABLE_GRADES, UniversitySeeder::HTTP_GET, '//div[@class="content"]');
