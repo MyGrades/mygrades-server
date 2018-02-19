@@ -15,7 +15,7 @@ class FHDarmstadt extends UniversitySeeder {
         $rule = $this->createRule("QIS / LSF", UniversitySeeder::RULE_SEMESTER_FORMAT_SEMESTER, '(^\w+)\s*([0-9]+)', $overview=true);
 
         // create actions for rule
-        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//form[@name="loginform"]/@action', $url='http://10.0.2.2/mygrades-test/hsdarmstadt/1.html');//$url='https://qis.h-da.de/qisserver/rds?state=user&type=0&application=lsf');
+        $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_GET, '//*[@id="wrapper"]//form[@name="loginform"]/@action', $url='https://qis.h-da.de/qisserver/rds?state=user&type=0&application=lsf');
         $login = $this->createAction($rule, UniversitySeeder::ACTION_TYPE_NORMAL, UniversitySeeder::HTTP_POST, '//*[@id="makronavigation"]/ul/li[7]/a/@href');
         $this->createActionParam($login, "asdf", $type=UniversitySeeder::ACTION_PARAM_TYPE_USERNAME);
         $this->createActionParam($login, "fdsa", $type=UniversitySeeder::ACTION_PARAM_TYPE_PASSWORD);
