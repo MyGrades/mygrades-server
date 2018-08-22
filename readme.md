@@ -12,22 +12,28 @@ It is important to note, that the server does not receive or store any informati
 
 ## Installation
 
+Prerequisites: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
 Install the server in your `/var/www/html` directory and point your [app](https://github.com/MyGrades/mygrades-app) to the server url.
 
 ```bash
 git clone https://github.com/MyGrades/mygrades-server.git
 cd mygrades-server
-cp .env.example .env # edit to your needs (only DB_* needed)
 
-chown www-data:www-data storage bootstrap/cache
-chmod ug+rwx storage bootstrap/cache
+# set up DB configuration, only executing the commands and not modifying the files works out of the box ;)
+cp docker/db/database.example docker/db/database # edit to your needs
+cp docker/db/password.example docker/db/password
+cp docker/db/root-password.example docker/db/root-password
+cp docker/db/user.example docker/db/user
+cp .env.example .env # edit to your needs (only DB_* necessary)
 
-composer install
-composer update
-composer dump-autoload
+# run containers and install dependencies
+docker-compose up -d
+docker exec php composer install
 
-php artisan migrate:install
-php artisan migrate:refresh --seed
+# migrate and seed database
+docker exec php artisan migrate:install
+docker exec php artisan migrate:refresh --seed
 ```
 
 
