@@ -2,6 +2,7 @@
 
 return [
 
+    'name' => 'MyGrades Server',
     'env' => env('APP_ENV', 'production'),
 
     /*

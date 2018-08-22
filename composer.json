@@ -5,8 +5,8 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "php": ">=7.1",
+        "laravel/framework": "5.3.*",
         "barryvdh/laravel-ide-helper": "^2.1",
         "flynsarmy/csv-seeder": "1.0.*"
     },
@@ -16,8 +16,8 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
         "doctrine/dbal": "~2.3",
-        "symfony/dom-crawler": "~3.0",
-        "symfony/css-selector": "~3.0"
+        "symfony/dom-crawler": "3.1.*",
+        "symfony/css-selector": "3.1.*"
     },
     "autoload": {
         "classmap": [

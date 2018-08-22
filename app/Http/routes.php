@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.adminbasic']],  functi
     Route::post('errors/update', 'ErrorController@updateAdmin')->name('adminErrorsUpdate');
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => ['logging', 'auth.basic']], function () {
+Route::group(['prefix' => 'api/v1', 'middleware' => ['bindings', 'logging', 'auth.basic']], function () {
     Route::get('universities', ['uses' => 'UniversityController@index']);
     Route::get('universities/{university}', ['uses' => 'UniversityController@show']);
 
