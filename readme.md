@@ -14,7 +14,14 @@ It is important to note, that the server does not receive or store any informati
 
 Prerequisites: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 
-Install the server in your `/var/www/html` directory and point your [app](https://github.com/MyGrades/mygrades-app) to the server url.
+Please add the following entries to your hosts file.
+```bash
+127.0.0.1 mygrades.dev
+127.0.0.1 phpmyadmin.mygrades.dev
+```
+
+Alternatively you can adjust the `VIRTUAL_HOST` environment variable in [docker-compose.yml](docker-compose.yml) to your needs.
+If you change the `VIRTUAL_HOST` for `nginx` you also need to change it in the [configuration file](docker/nginx/site.conf). 
 
 ```bash
 git clone https://github.com/MyGrades/mygrades-server.git
@@ -28,14 +35,19 @@ cp docker/db/user.example docker/db/user
 cp .env.example .env # edit to your needs (only DB_* necessary)
 
 # run containers and install dependencies
+cd docker
 docker-compose up -d
 docker exec php composer install
 
 # migrate and seed database
-docker exec php artisan migrate:install
-docker exec php artisan migrate:refresh --seed
+docker exec php php artisan migrate:install
+docker exec php php artisan migrate:refresh --seed
+
+# stop containers
+docker-compose stop
 ```
 
+Point your [app](https://github.com/MyGrades/mygrades-app) to the server url `http://mygrades.dev/`.
 
 ## Used third-party libraries
 * [Laravel](https://github.com/laravel/laravel)
