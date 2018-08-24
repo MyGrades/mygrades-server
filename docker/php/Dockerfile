@@ -26,6 +26,14 @@ RUN apk add --no-cache --virtual .build-deps \
         tokenizer \
         xml \
         zip \
-        intl \
-    && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+        intl
+
+# install composer
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && apk del -f .build-deps
+
+# install phpunit
+RUN curl https://phar.phpunit.de/phpunit.phar -L > phpunit.phar \
+  && chmod +x phpunit.phar \
+  && mv phpunit.phar /usr/local/bin/phpunit \
+  && phpunit --version

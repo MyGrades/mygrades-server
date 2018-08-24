@@ -2,10 +2,8 @@
 
 use App\Rule;
 use App\University;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Carbon\Carbon;
+use Tests\TestCase;
 
 class ApiTest extends TestCase
 {
@@ -20,8 +18,10 @@ class ApiTest extends TestCase
         $response = $this->call('GET', $this->apiPrefix . '/universities?published=true');
 
         $universities = $this->parseJson($response);
-        foreach($universities as $university)
-        {
+        /**
+         * @var $university University
+         */
+        foreach ($universities as $university) {
             $this->assertObjectHasAttribute("university_id", $university);
             $this->assertObjectHasAttribute("published", $university);
             $this->assertObjectHasAttribute("name", $university);
@@ -42,8 +42,7 @@ class ApiTest extends TestCase
         Rule::setStaticHidden($hiddenFields);
 
         $universities = $this->parseJson($response);
-        foreach($universities as $university)
-        {
+        foreach ($universities as $university) {
             // get detailed university
             $detailedResponse = $this->call('GET', $this->apiPrefix . '/universities/' . $university->university_id . '?detailed=true');
             $detailedUniversity = $this->parseJson($detailedResponse);
@@ -67,8 +66,7 @@ class ApiTest extends TestCase
         // check structure of rules
         $this->assertObjectHasAttribute("rules", $university);
         $this->assertGreaterThan(0, count($university->rules));
-        foreach ($university->rules as $rule)
-        {
+        foreach ($university->rules as $rule) {
             //var_dump($rule);
             // set booleans for action params username and password
             $usernameIsPresent = false;
@@ -86,8 +84,7 @@ class ApiTest extends TestCase
             // check structure of actions
             $this->assertObjectHasAttribute("actions", $rule);
             $this->assertGreaterThan(0, count($rule->actions));
-            foreach ($rule->actions as $action)
-            {
+            foreach ($rule->actions as $action) {
                 $this->assertObjectHasAttribute("action_id", $action);
                 $this->assertObjectHasAttribute("position", $action);
                 $this->assertObjectHasAttribute("method", $action);
@@ -96,8 +93,7 @@ class ApiTest extends TestCase
                 $this->assertObjectHasAttribute("action_params", $action);
 
                 // check structure of action_params if present
-                if (count($action->action_params) > 0)
-                {
+                if (count($action->action_params) > 0) {
                     foreach ($action->action_params as $action_param) {
                         $this->assertObjectHasAttribute("action_param_id", $action_param);
                         $this->assertObjectHasAttribute("key", $action_param);
@@ -117,8 +113,7 @@ class ApiTest extends TestCase
             // check structure of transformer_mappings
             $this->assertObjectHasAttribute("transformer_mappings", $rule);
             $this->assertGreaterThan(0, count($rule->transformer_mappings));
-            foreach ($rule->transformer_mappings as $transformer_mapping)
-            {
+            foreach ($rule->transformer_mappings as $transformer_mapping) {
                 $this->assertObjectHasAttribute("transformer_mapping_id", $transformer_mapping);
                 $this->assertObjectHasAttribute("name", $transformer_mapping);
                 $this->assertObjectHasAttribute("parse_expression", $transformer_mapping);
@@ -129,13 +124,10 @@ class ApiTest extends TestCase
             $this->assertTrue($passwordIsPresent, "Password is present");
 
             // if overview === true, search for actions with type === table_overview
-            if ($rule->overview === true)
-            {
+            if ($rule->overview === true) {
                 $tableOverviewIsPresent = false;
-                foreach ($rule->actions as $action)
-                {
-                    if ($action->type === 'table_overview')
-                    {
+                foreach ($rule->actions as $action) {
+                    if ($action->type === 'table_overview') {
                         $tableOverviewIsPresent = true;
                         break;
                     }
@@ -162,8 +154,7 @@ class ApiTest extends TestCase
         // get latest timestamp
         $latestTimestamp = $this->getLatestTimestamp($universities);
 
-        if ($latestTimestamp !== null)
-        {
+        if ($latestTimestamp !== null) {
             // get all published universities with Updated-At-Server header parameter
             $response = $this->call('GET', $this->apiPrefix . '/universities?published=true', [], [], [], $server = [
                 'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
@@ -180,7 +171,7 @@ class ApiTest extends TestCase
                     'HTTP_Updated-At-Server-Published' => $latestTimestamp->toDateTimeString()
                 ]);
                 $universities = $this->parseJson($response);
-                foreach($universities as $university) {
+                foreach ($universities as $university) {
                     $updated_at_server_current = Carbon::parse($university->updated_at_server);
                     $this->assertTrue($updated_at_server_current->gt($latestTimestamp));
                 }
@@ -192,13 +183,12 @@ class ApiTest extends TestCase
      * Gets the latest timestamp for a list of universities.
      *
      * @param $universities
-     * @return null|static
+     * @return null|Carbon
      */
     private function getLatestTimestamp($universities)
     {
         $latestTimestamp = null;
-        foreach ($universities as $university)
-        {
+        foreach ($universities as $university) {
             $actTimestamp = Carbon::parse($university->updated_at_server);
             if ($latestTimestamp === null || $actTimestamp->gt($latestTimestamp)) {
                 $latestTimestamp = $actTimestamp;

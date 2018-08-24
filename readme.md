@@ -43,11 +43,17 @@ docker exec php composer install
 docker exec php php artisan migrate:install
 docker exec php php artisan migrate:refresh --seed
 
-# stop containers
-docker-compose stop
+# stop & remove containers
+docker-compose down
 ```
 
 Point your [app](https://github.com/MyGrades/mygrades-app) to the server url `http://mygrades.dev/`.
+
+## Tests
+To execute the unit tests simply run
+```bash
+docker exec php phpunit
+```
 
 ## Used third-party libraries
 * [Laravel](https://github.com/laravel/laravel)
