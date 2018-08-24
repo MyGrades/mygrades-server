@@ -149,7 +149,6 @@ return [
         /*
          * Custom added Providers
          */
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
