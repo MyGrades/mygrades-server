@@ -51,6 +51,6 @@ class ActionParam extends Model
      */
     public function action()
     {
-        return $this->belongsTo('App\Action');
+        return $this->belongsTo('App\Action', 'action_id');
     }
 }

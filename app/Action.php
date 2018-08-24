@@ -55,7 +55,7 @@ class Action extends Model
      */
     public function rule()
     {
-        return $this->belongsTo('App\Rule');
+        return $this->belongsTo('App\Rule', 'rule_id');
     }
 
     /**
@@ -63,6 +63,6 @@ class Action extends Model
      */
     public function actionParams()
     {
-        return $this->hasMany('App\ActionParam');
+        return $this->hasMany('App\ActionParam', 'action_id');
     }
 }

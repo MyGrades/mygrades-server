@@ -81,7 +81,7 @@ class University extends Model
      */
     public function rules()
     {
-        return $this->hasMany('App\Rule');
+        return $this->hasMany('App\Rule', 'university_id');
     }
 
     /**

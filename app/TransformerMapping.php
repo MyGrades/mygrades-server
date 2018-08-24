@@ -51,6 +51,6 @@ class TransformerMapping extends Model
      */
     public function rule()
     {
-        return $this->belongsTo('App\Rule');
+        return $this->belongsTo('App\Rule', 'rule_id');
     }
 }

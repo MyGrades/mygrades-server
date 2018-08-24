@@ -60,7 +60,7 @@ class Rule extends Model
      */
     public function university()
     {
-        return $this->belongsTo('App\University');
+        return $this->belongsTo('App\University', 'university_id');
     }
 
     /**
@@ -68,7 +68,7 @@ class Rule extends Model
      */
     public function actions()
     {
-        return $this->hasMany('App\Action');
+        return $this->hasMany('App\Action', 'rule_id');
     }
 
     /**
@@ -76,6 +76,6 @@ class Rule extends Model
      */
     public function transformerMappings()
     {
-        return $this->hasMany('App\TransformerMapping');
+        return $this->hasMany('App\TransformerMapping', 'rule_id');
     }
 }
