@@ -34,6 +34,12 @@ cp docker/db/root-password.example docker/db/root-password
 cp docker/db/user.example docker/db/user
 cp .env.example .env # edit to your needs (only DB_* necessary)
 
+# set folder permissions
+chown -R <webserver_user>:<webserver_group> /path/to/mygrades-server
+find /path/to/mygrades-server -type f -exec chmod 644 {} \;
+find /path/to/mygrades-server -type d -exec chmod 755 {} \;
+chmod -R ug+rwx /path/to/mygrades-server/storage /path/to/mygrades-server/bootstrap/cache
+
 # run containers and install dependencies
 cd docker
 docker-compose up -d
