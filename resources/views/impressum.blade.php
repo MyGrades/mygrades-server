@@ -7,10 +7,17 @@
         <h1>Impressum</h1>
         <h2>Angaben gemäß § 5 TMG:</h2>
         <p>
-            MyGrades<br />
-            Tilman Ginzel, Jonas Theis<br />
-            Albrechtstraße 28, Bertramstraße 4<br />
-            65185 Wiesbaden
+
+            MyGrades<br /><br />
+            Tilman Ginzel<br />
+            Adolfsallee 37<br />
+            65185 Wiesbaden<br />
+            Deutschland<br /><br />
+
+            Jonas Theis <br/>
+            Akazienstraße 12<br />
+            55432 Damscheid<br/>
+            Deutschland<br/> <br/>
         </p>
         <h2>Kontakt:</h2>
         <p>
