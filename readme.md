@@ -21,14 +21,13 @@ Please add the following entries to your hosts file.
 ```
 
 Alternatively you can adjust the `VIRTUAL_HOST` environment variable in [docker-compose.yml](docker-compose.yml) to your needs.
-If you change the `VIRTUAL_HOST` for `nginx` you also need to change it in the [configuration file](docker/nginx/site.conf). 
 
 ```bash
 git clone https://github.com/MyGrades/mygrades-server.git
 cd mygrades-server
 
 # set up DB configuration, only executing the commands and not modifying the files works out of the box ;)
-cp docker/db/database.example docker/db/database # edit to your needs
+cp docker/db/database.example docker/db/database
 cp docker/db/password.example docker/db/password
 cp docker/db/root-password.example docker/db/root-password
 cp docker/db/user.example docker/db/user
@@ -42,7 +41,7 @@ chmod -R ug+rwx /path/to/mygrades-server/storage /path/to/mygrades-server/bootst
 
 # run containers and install dependencies
 cd docker
-docker-compose up -d
+docker-compose -f docker-compose.dev.yml -d up
 docker exec php composer install
 
 # migrate and seed database

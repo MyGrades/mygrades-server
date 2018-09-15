@@ -7,9 +7,6 @@ services:
     restart: always
     ports:
       - "80:80"
-      - "443:443"
-    labels:
-          com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
     volumes:
       - ./nginx-proxy/data/htpasswd:/etc/nginx/htpasswd:ro
       - ./nginx-proxy/data/certs:/etc/nginx/certs:ro
@@ -20,18 +17,6 @@ services:
     depends_on:
       - nginx
 
-  letsencrypt-companion:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt-companion
-    restart: always
-    volumes:
-      - ./nginx-proxy/data/certs:/etc/nginx/certs:rw
-      - ./nginx-proxy/data/vhost.d:/etc/nginx/vhost.d:rw
-      -  nginx-proxy-html:/usr/share/nginx/html:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - nginx-proxy
-
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -40,9 +25,7 @@ services:
       - ../:/var/www/html
       - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
     environment:
-      VIRTUAL_HOST: mygrades.de,www.mygrades.de
-      LETSENCRYPT_HOST: mygrades.de,www.mygrades.de
-      LETSENCRYPT_EMAIL: hallo@mygrades.de
+      VIRTUAL_HOST: mygrades.dev,www.mygrades.dev
     depends_on:
       - php
 
@@ -75,9 +58,7 @@ services:
     container_name: phpmyadmin
     restart: always
     environment:
-      VIRTUAL_HOST: phpmyadmin.mygrades.de,www.phpmyadmin.mygrades.de
-      LETSENCRYPT_HOST: phpmyadmin.mygrades.de,www.phpmyadmin.mygrades.de
-      LETSENCRYPT_EMAIL: hallo@mygrades.de
+      VIRTUAL_HOST: phpmyadmin.mygrades.dev,www.phpmyadmin.mygrades.dev
       PMA_HOST: db
       PMA_PORT: 3306
     depends_on:
