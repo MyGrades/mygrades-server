@@ -41,7 +41,7 @@ chmod -R ug+rwx /path/to/mygrades-server/storage /path/to/mygrades-server/bootst
 
 # run containers and install dependencies
 cd docker
-docker-compose -f docker-compose.dev.yml -d up
+docker-compose -f docker-compose.dev.yml up -d
 docker exec php composer install
 
 # migrate and seed database
