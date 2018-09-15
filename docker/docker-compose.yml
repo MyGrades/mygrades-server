@@ -33,18 +33,21 @@ services:
       - nginx-proxy
 
   nginx:
-    image: nginx:alpine
+    build: ./nginx
     container_name: nginx
     restart: always
     volumes:
       - ../:/var/www/html
-      - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
     environment:
       VIRTUAL_HOST: mygrades.de,www.mygrades.de
       LETSENCRYPT_HOST: mygrades.de,www.mygrades.de
       LETSENCRYPT_EMAIL: hallo@mygrades.de
+      VIRTUAL_PORT: 8080
     depends_on:
       - php
+    expose:
+      - 8080
+    user: "${USER_ID}"
 
   php:
     build: ./php
@@ -54,6 +57,7 @@ services:
       - ../:/var/www/html
     depends_on:
       - db
+    user: "${USER_ID}"
 
   db:
     image: mysql:5.7

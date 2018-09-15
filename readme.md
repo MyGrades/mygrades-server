@@ -41,6 +41,11 @@ chmod -R ug+rwx /path/to/mygrades-server/storage /path/to/mygrades-server/bootst
 
 # run containers and install dependencies
 cd docker
+
+# export USER_ID from current <webserver_user> on production
+export USER_ID="$(id -u):$(id -g)"
+
+# run mygrades-server
 docker-compose -f docker-compose.dev.yml up -d
 docker exec php composer install
 
