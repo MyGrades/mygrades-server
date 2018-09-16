@@ -79,8 +79,8 @@ services:
     container_name: phpmyadmin
     restart: always
     environment:
-      VIRTUAL_HOST: phpmyadmin.mygrades.de,www.phpmyadmin.mygrades.de
-      LETSENCRYPT_HOST: phpmyadmin.mygrades.de,www.phpmyadmin.mygrades.de
+      VIRTUAL_HOST: pma.mygrades.de,www.pma.mygrades.de
+      LETSENCRYPT_HOST: pma.mygrades.de,www.pma.mygrades.de
       LETSENCRYPT_EMAIL: hallo@mygrades.de
       PMA_HOST: db
       PMA_PORT: 3306
