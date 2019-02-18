@@ -25,7 +25,7 @@ services:
       - ../:/var/www/html
       - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
     environment:
-      VIRTUAL_HOST: mygrades.dev,www.mygrades.dev
+      VIRTUAL_HOST: mygrades.dev,www.mygrades.dev,10.0.2.2
       VIRTUAL_PORT: 8080
     depends_on:
       - php
