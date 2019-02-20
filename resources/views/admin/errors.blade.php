@@ -29,14 +29,14 @@
                 @foreach ($openErrors as $error)
                     <tr>
                         <td>{{ $error->error_id }}</td>
-                        <td>{{ $error->university_id or '' }}: {{ $error->university->name or '' }}</td>
-                        <td>{{ $error->rule_id  or '' }}</td>
-                        <td>{{ $error->name  or '' }}</td>
-                        <td>{{ $error->message  or '' }}</td>
-                        <td>{{ $error->email  or '' }}</td>
-                        <td>{{ $error->app_version  or '' }}</td>
-                        <td>{{ $error->device  or '' }}</td>
-                        <td>{{ $error->android_version  or '' }}</td>
+                        <td>{{ $error->university_id }}: {{ $error->university->name or '' }}</td>
+                        <td>{{ $error->rule_id }}</td>
+                        <td>{{ $error->name }}</td>
+                        <td>{{ $error->message }}</td>
+                        <td>{{ $error->email }}</td>
+                        <td>{{ $error->app_version }}</td>
+                        <td>{{ $error->device }}</td>
+                        <td>{{ $error->android_version }}</td>
                         <td>{{ $error->created_at->format('d.m.Y H:i') }} Uhr</td>
                         <td>
                             <p style="text-align: center">
@@ -76,7 +76,7 @@
             @foreach ($fixedErrors as $error)
                 <tr>
                     <td>{{ $error->error_id }}</td>
-                    <td>{{ $error->university_id }}: {{ $error->university->name }}</td>
+                    <td>{{ $error->university_id }}: {{ $error->university->name or '' }}</td>
                     <td>{{ $error->name }}</td>
                     <td>{{ $error->message }}</td>
                     <td>{{ $error->email }}</td>

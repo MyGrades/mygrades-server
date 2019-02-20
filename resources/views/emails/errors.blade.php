@@ -6,7 +6,7 @@
         <div class="entry">
             <p>
                 <strong>Error ID:</strong> {{ $error->error_id }} <br>
-                <strong>University:</strong> {{ $error->university_id}}: {{ $error->university->name }}<br>
+                <strong>University:</strong> {{ $error->university_id}}: {{ $error->university->name or '' }}<br>
                 @if (!empty($error->rule_id))
                     <strong>Rule ID:</strong> {{ $error->rule_id }}<br>
                 @endif

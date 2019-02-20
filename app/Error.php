@@ -50,6 +50,6 @@ class Error extends Model
      */
     public function university()
     {
-        return $this->belongsTo('App\University');
+        return $this->belongsTo('App\University', 'university_id', 'university_id');
     }
 }

@@ -44,8 +44,8 @@ class ErrorController extends Controller
      */
     public function indexAdmin()
     {
-        $openErrors = Error::where('fixed', 0)->orderBy('error_id', 'desc')->get();
-        $fixedErrors = Error::where('fixed', 1)->orderBy('error_id', 'desc')->get();
+        $openErrors = Error::with('university')->where('fixed', 0)->orderBy('error_id', 'desc')->get();
+        $fixedErrors = Error::with('university')->where('fixed', 1)->orderBy('error_id', 'desc')->get();
         return view('admin.errors', ['openErrors' => $openErrors, 'fixedErrors' => $fixedErrors]);
     }
 
