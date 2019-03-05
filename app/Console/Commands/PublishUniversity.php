@@ -81,6 +81,7 @@ class PublishUniversity extends Command
 
         // run the seeder
         $seeder->run();
+        $seeder->updateUniversityTimestamp();
 
         // log
         if ($isCreateMode) {

@@ -269,4 +269,14 @@ abstract class UniversitySeeder {
 
         return implode($delimiter, $temp);
     }
+
+    /**
+     * Updates the university's updated at timestamp.
+     * Important: Needs to be called after uni update so that it will be automatically re-fetched within the app after
+     * changes to any rule of university.
+     */
+    public function updateUniversityTimestamp()
+    {
+        $this->university->touch();
+    }
 }
