@@ -8,7 +8,9 @@
 class UniWuerzburg extends UniversitySeeder {
 
     protected $universityId = 398;
-    protected $published = true;
+
+    // uni wuerzburg switched to a new system which requires JavaScript :/
+    protected $published = false;
 
     public function run()
     {
